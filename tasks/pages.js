@@ -1,8 +1,8 @@
 'use strict';
 
-const gulp           = require('gulp');
-
-const gulpPug        = require('gulp-pug'),
+const gulp           = require('gulp'),
+      pump           = require('pump'),
+      gulpPug        = require('gulp-pug'),
       gulpIf         = require('gulp-if'),
       gulpHtmlmin    = require('gulp-htmlmin'),
       gulpCleanCss   = require('gulp-clean-css'),
@@ -21,7 +21,9 @@ const configPug      = require('../config/pug');
  */
 
 module.exports = (browserSync) => {
-  gulp.task('pages-pug', () => gulp
+  gulp.task('pages-pug', (cb) => {
+
+  }gulp
     .src([
       'src/pages/**/*.pug',
       '!src/pages/**/_*.pug'])
