@@ -12,32 +12,20 @@ const gulp           = require('gulp'),
 
 const configPug      = require('../config/pug');
 
-/**
- * Task: pages-pug
- *
- * Compiles pug templates in src/pages/<pagename>/xx/<templatename>.pug and
- * copies the compiled template to build/<templatename>.php.
- * Ignores files starting with _.
- */
-
 module.exports = (browserSync) => {
   gulp.task('pages-pug', (cb) => {
-
-  }gulp
-    .src([
-      'src/pages/**/*.pug',
-      '!src/pages/**/_*.pug'])
-    .pipe(gulpPug(configPug))
-    .pipe(gulpHtmlmin({
+    pump([
+      gulp.src(['src/pages/**/*.pug', '!src/pages/**/_*.pug']),
+      gulpPug(configPug),
+      gulpHtmlmin({
         collapseWhitespace: true,
-        removeComments: true,
-        removeCommentsFromCDATA: true}))
-    .pipe(gulpRename((path) => {
-      path.extname = '.php';
-    }))
-    .pipe(gulp.dest('./build'))
-    .pipe(browserSync.stream())
-  );
+        removeComments: true, 
+        removeCommentsFromCDATA: true}),
+      gulpRename((path) => {path.extname = '.php';}),
+      gulp.dest('./build'),
+      browserSync.stream()
+    ], cb);
+  });
 
   /**
    * Task: pages-assets
