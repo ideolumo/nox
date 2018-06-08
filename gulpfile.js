@@ -1,14 +1,14 @@
 'use strict';
 
 const gulp        = require('gulp'),
-      browserSync = require('browser-sync').create();
+  browserSync = require('browser-sync').create();
 
 require('./tasks/pages')(browserSync);
 require('./tasks/template')(browserSync);
 require('./tasks/clean');
 require('./tasks/javascript')(browserSync);
 require('./tasks/static')(browserSync);
-require('./tasks/http-server')(browserSync); 
+require('./tasks/http-server')(browserSync);
 
 gulp.task('watch', () => {
   gulp.watch(['package.json'], ['build']);

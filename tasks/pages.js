@@ -1,16 +1,11 @@
 'use strict';
 
-const gulp           = require('gulp'),
-      pump           = require('pump'),
-      gulpPug        = require('gulp-pug'),
-      gulpIf         = require('gulp-if'),
-      gulpHtmlmin    = require('gulp-htmlmin'),
-      gulpCleanCss   = require('gulp-clean-css'),
-      gulpRename     = require('gulp-rename'),
-      gulpData       = require('gulp-data'),
-      gulpRun        = require('gulp-run');
-
-const configPug      = require('../config/pug');
+const configPug    = require('../config/pug');
+const gulp         = require('gulp');
+const gulpHtmlmin  = require('gulp-htmlmin');
+const gulpPug      = require('gulp-pug');
+const gulpRename   = require('gulp-rename');
+const pump         = require('pump');
 
 module.exports = (browserSync) => {
   gulp.task('pages-pug', (cb) => {
@@ -19,7 +14,7 @@ module.exports = (browserSync) => {
       gulpPug(configPug),
       gulpHtmlmin({
         collapseWhitespace: true,
-        removeComments: true, 
+        removeComments: true,
         removeCommentsFromCDATA: true}),
       gulpRename((path) => {path.extname = '.php';}),
       gulp.dest('./build'),
@@ -35,14 +30,14 @@ module.exports = (browserSync) => {
    * Ignores files starting with _.
    */
   gulp.task('pages-assets', () => gulp
-      .src([
-          'src/pages/**/*.*',
-          '!src/pages/**/_*',
-          '!src/pages/**/*.pug',
-          '!src/pages/**/*.sass'])
-      .pipe(gulp.dest('./build'))
-      .pipe(browserSync.stream())
+    .src([
+      'src/pages/**/*.*',
+      '!src/pages/**/_*',
+      '!src/pages/**/*.pug',
+      '!src/pages/**/*.sass'])
+    .pipe(gulp.dest('./build'))
+    .pipe(browserSync.stream())
   );
 
   gulp.task('pages', ['pages-pug', 'pages-assets']);
-}
+};

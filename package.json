@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
     "build": "gulp build",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "lint": "eslint ./gulpfile.js ./tasks/**/*",
+    "lint-fix": "eslint --fix ./gulpfile.js ./tasks/**/*"
   },
   "author": "",
   "license": "ISC",
@@ -18,9 +20,7 @@
     "jstransformer-sass": "^1.0.0",
     "node-sass": "^4.9.0",
     "pug": "^2.0.3",
-    "pug-cli": "git+https://github.com/pugjs/pug-cli.git"
-  },
-  "devDependencies": {
+    "pug-cli": "git+https://github.com/pugjs/pug-cli.git",
     "browser-sync": "^2.24.4",
     "del": "^3.0.0",
     "gulp": "^3.0.0",
@@ -36,5 +36,9 @@
     "http-server": "^0.10.0",
     "pump": "^3.0.0",
     "uglify-es": "^3.3.9"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-sort-requires": "^2.1.0"
   }
 }

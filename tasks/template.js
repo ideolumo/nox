@@ -1,11 +1,9 @@
 'use strict';
 
-const gulp           = require('gulp'),
-      gulpCleanCss   = require('gulp-clean-css'),
-      gulpSass       = require('gulp-sass'),
-      gulpIf         = require('gulp-if'),
-      gulpData       = require('gulp-data'),
-      configSass     = require('../config/sass');
+const configSass   = require('../config/sass');
+const gulp         = require('gulp');
+const gulpCleanCss = require('gulp-clean-css');
+const gulpSass     = require('gulp-sass');
 
 module.exports = (browserSync) => {
   /**
@@ -33,14 +31,14 @@ module.exports = (browserSync) => {
    * Ignores files starting with _ and sass/pug files
    */
   gulp.task('template-assets', () => gulp
-      .src([
-          'src/template/**/*.*',
-          '!src/template/**/_*',
-          '!src/template/**/*.pug',
-          '!src/template/**/*.sass'])
-      .pipe(gulp.dest('./build/assets/template'))
-      .pipe(browserSync.stream())
+    .src([
+      'src/template/**/*.*',
+      '!src/template/**/_*',
+      '!src/template/**/*.pug',
+      '!src/template/**/*.sass'])
+    .pipe(gulp.dest('./build/assets/template'))
+    .pipe(browserSync.stream())
   );
 
   gulp.task('template', ['template-sass', 'template-assets']);
-}
+};

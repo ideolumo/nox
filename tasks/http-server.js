@@ -1,8 +1,7 @@
 'use strict';
 
-const gulp         = require('gulp'),
-      childProcess = require('child_process'),
-      del          = require('del');
+const childProcess = require('child_process');
+const gulp         = require('gulp');
 
 module.exports = (browserSync) => {
   /**
@@ -13,16 +12,33 @@ module.exports = (browserSync) => {
   gulp.task('docker-compose', () => {
     let docker = childProcess
       .spawn('docker-compose', ['-f', './docker/docker-compose.yml', 'up']);
+
     docker.stdout.on('data', (data) => console.log(data.toString()));
+
     docker.stderr.on('data', (data) => console.error(data.toString()));
-    docker.on('close', (code) => console.log(`Docker-compose exited with code ${code}`));
+
+    docker.on('close', (code) => {
+      console.log(`Docker-compose exited with code ${code}`);
+    });
+
     process.on('exit', () => {
       console.log('Shutting down docker-compose...');
+
       let dockerShutdown = childProcess
-          .spawn('docker-compose', ['-f', './docker/docker-compose.yml', 'down']);
-      dockerShutdown.stdout.on('data', (data) => console.log(data.toString()));
-      dockerShutdown.stderr.on('data', (data) => console.error(data.toString()));
-      dockerShutdown.on('close', (code) => console.log(`Docker-compose successfully shutted down with code ${code}`));
+        .spawn('docker-compose', ['-f', './docker/docker-compose.yml', 'down']);
+
+      dockerShutdown.stdout.on('data', (data) => {
+        console.log(data.toString());
+      });
+
+      dockerShutdown.stderr.on('data', (data) => {
+        console.error(data.toString());
+      });
+
+      dockerShutdown.on('close', (code) => {
+        console.log(
+          `Docker-compose successfully shutted down with code ${code}`);
+      });
     });
   });
 
@@ -41,12 +57,12 @@ module.exports = (browserSync) => {
       }
     });
   });
-  
+
   /**
    * Task: http-server
    *
    * Starts all http server related tasks.
    */
   gulp.task('http-server', ['docker-compose', 'browser-sync']);
-}
+};
 
