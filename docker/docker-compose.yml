@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    apache-php:
+        build: ./httpd
+        volumes:
+            - ../build:/var/www/html
+        ports:
+            - 8081:80
+        depends_on:
+            - mysql
+        links:
+            - "mysql:localhost"
+    mysql:
+        image: mysql
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_DATABASE: static_api
+        volumes:
+            - ../sql/captcha.sql:/docker-entrypoint-initdb.d/database.sql

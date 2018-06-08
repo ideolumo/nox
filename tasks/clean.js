@@ -1,7 +1,7 @@
 'use strict';
 
-const gulp           = require('gulp');
-
+const gulp           = require('gulp'),
+      del          = require('del');
 /**
  * Task: clean
  *
