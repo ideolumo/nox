@@ -2,8 +2,13 @@
 
 const childProcess = require('child_process');
 const gulp         = require('gulp');
+const path         = require('path');
 
-module.exports = (browserSync) => {
+module.exports = (context) => {
+  let pathToDocker = path.resolve(context.initCwd, 'docker/docker-compose.yml')
+
+  console.log('Loading docker-compose from:', pathToDocker)
+
   /**
    * Task: docker-compose
    *
@@ -11,7 +16,7 @@ module.exports = (browserSync) => {
    */
   gulp.task('docker-compose', () => {
     let docker = childProcess
-      .spawn('docker-compose', ['-f', './docker/docker-compose.yml', 'up']);
+      .spawn('docker-compose', ['-f', pathToDocker, 'up']);
 
     docker.stdout.on('data', (data) => console.log(data.toString()));
 
@@ -25,7 +30,7 @@ module.exports = (browserSync) => {
       console.log('Shutting down docker-compose...');
 
       let dockerShutdown = childProcess
-        .spawn('docker-compose', ['-f', './docker/docker-compose.yml', 'down']);
+        .spawn('docker-compose', ['-f', pathToDocker, 'down']);
 
       dockerShutdown.stdout.on('data', (data) => {
         console.log(data.toString());
@@ -49,7 +54,7 @@ module.exports = (browserSync) => {
    * a change. Proxies requests to http server running on localhost:8081.
    */
   gulp.task('browser-sync', () => {
-    browserSync.init({
+    context.browserSync.init({
       proxy: 'localhost:8081',
       port: 8080,
       ui: {

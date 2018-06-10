@@ -3,9 +3,10 @@
 const browserSync    = require('browser-sync').create();
 const defaultOptions = require('./default-options');
 const gulp           = require('gulp');
-
+const process        = require('process');
 
 const context = {
+  initCwd: process.env.INIT_CWD,
   options: defaultOptions,
   browserSync
 }
@@ -17,7 +18,7 @@ require('./gulp-tasks/template')(browserSync);
 require('./gulp-tasks/clean');
 require('./gulp-tasks/javascript')(browserSync);
 require('./gulp-tasks/static')(browserSync);
-require('./gulp-tasks/http-server')(browserSync);
+require('./gulp-tasks/http-server')(context);
 
 gulp.task('watch', () => {
   gulp.watch(['package.json'], ['build']);

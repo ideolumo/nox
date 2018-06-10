@@ -8,7 +8,10 @@ let options = {
   buildFolder: './build',
 };
 
-options.sass = {};
+options.sass = {
+  includePaths: [options.sourceFolder],
+  outputStyle: 'compressed'
+};
 
 options.pug = {
   basedir: this.sourceFolder,
@@ -16,7 +19,7 @@ options.pug = {
     sass: gulpComposedPipesPug.sassFilterPug(options.sass)
   },
   locals: {
-    require: gulpComposedPipesPug.remappedRootRequire('./src')
+    require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
   }
 };
 
