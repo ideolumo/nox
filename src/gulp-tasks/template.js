@@ -1,11 +1,10 @@
 'use strict';
 
-const configSass   = require('../config/sass');
-const gulp         = require('gulp');
-const gulpCleanCss = require('gulp-clean-css');
-const gulpSass     = require('gulp-sass');
+const gulp                  = require('gulp');
+const gulpComposedPipesSass = require('../gulp-composed-pipes/sass');
+const pump                  = require('pump');
 
-module.exports = (browserSync) => {
+module.exports = (context) => {
   /**
    * Task: template-sass
    *
@@ -13,16 +12,18 @@ module.exports = (browserSync) => {
    * build/assets/template/css. Minifies css.
    * Ignores files starting with _.
    */
-  gulp.task('template-sass', () => gulp
-    .src([
-      'src/template/**/*.sass',
-      '!src/template/**/_*.sass',
-      '!src/template/regions/**/*'])
-    .pipe(gulpSass(configSass).on('error', gulpSass.logError))
-    .pipe(gulpCleanCss({}))
-    .pipe(gulp.dest('./build/assets/template/css'))
-    .pipe(browserSync.stream())
-  );
+  gulp.task('template-sass', (cb) => { 
+    pump([
+      gulp.src([
+        'src/template/**/*.sass',
+        '!src/template/**/_*.sass',
+        '!src/template/regions/**/*'
+      ]),
+      ...gulpComposedPipesSass(context),
+      gulp.dest('./build/assets/template/css'),
+      context.browserSync.stream()
+    ], cb);
+  });
 
   /**
    * Task: template-assets
@@ -37,7 +38,7 @@ module.exports = (browserSync) => {
       '!src/template/**/*.pug',
       '!src/template/**/*.sass'])
     .pipe(gulp.dest('./build/assets/template'))
-    .pipe(browserSync.stream())
+    .pipe(context.browserSync.stream())
   );
 
   gulp.task('template', ['template-sass', 'template-assets']);

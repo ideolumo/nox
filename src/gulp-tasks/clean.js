@@ -8,4 +8,7 @@ const gulp = require('gulp');
  *
  * Clean build folder
  */
-gulp.task('clean', () => del.sync(['build/**/*']));
+module.exports = (context) => {
+  gulp.task('clean', () => del.sync([context.options.buildFolder + '/**/*']));
+}
+

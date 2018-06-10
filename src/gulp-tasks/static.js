@@ -2,7 +2,7 @@
 
 const gulp           = require('gulp');
 
-module.exports = (browserSync) => {
+module.exports = (context) => {
   /**
    * Task: static
    *
@@ -11,6 +11,6 @@ module.exports = (browserSync) => {
   gulp.task('static', () => gulp
     .src(['src/static/**/*', 'src/static/**/.*'])
     .pipe(gulp.dest('./build'))
-    .pipe(browserSync.stream())
+    .pipe(context.browserSync.stream())
   );
 };

@@ -5,7 +5,7 @@ const pump       = require('pump');
 const uglifyEs   = require('uglify-es');
 const gulpUglify = (require('gulp-uglify/composer'))(uglifyEs, console);
 
-module.exports = (browserSync) => {
+module.exports = (context) => {
   /**
    * Task: javascript
    *
@@ -16,7 +16,7 @@ module.exports = (browserSync) => {
       gulp.src(['src/js/**/*.js']),
       gulpUglify({}),
       gulp.dest('./build/js'),
-      browserSync.stream()
+      context.browserSync.stream()
     ], cb);
   });
 };

@@ -14,10 +14,10 @@ const context = {
 console.log(context);
 
 require('./gulp-tasks/pages')(context);
-require('./gulp-tasks/template')(browserSync);
-require('./gulp-tasks/clean');
-require('./gulp-tasks/javascript')(browserSync);
-require('./gulp-tasks/static')(browserSync);
+require('./gulp-tasks/template')(context);
+require('./gulp-tasks/clean')(context);
+require('./gulp-tasks/javascript')(context);
+require('./gulp-tasks/static')(context);
 require('./gulp-tasks/http-server')(context);
 
 gulp.task('watch', () => {
