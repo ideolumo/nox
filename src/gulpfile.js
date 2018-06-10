@@ -1,0 +1,45 @@
+'use strict';
+
+const browserSync    = require('browser-sync').create();
+const defaultOptions = require('./default-options');
+const gulp           = require('gulp');
+
+
+const context = {
+  options: defaultOptions,
+  browserSync
+}
+
+console.log(context);
+
+require('./gulp-tasks/pages')(context);
+require('./gulp-tasks/template')(browserSync);
+require('./gulp-tasks/clean');
+require('./gulp-tasks/javascript')(browserSync);
+require('./gulp-tasks/static')(browserSync);
+require('./gulp-tasks/http-server')(browserSync);
+
+gulp.task('watch', () => {
+  gulp.watch(['package.json'], ['build']);
+  gulp.watch(['src/pages/**/*.*'], ['pages']);
+  gulp.watch('src/css/**/*.sass', ['sass']);
+  gulp.watch('src/js/**/*.js', ['js']);
+  gulp.watch(['src/static/**/*', 'src/static/**/.*'], ['static']);
+  gulp.watch('src/template/**/*', ['build']);
+  gulp.watch('src/components/**/*', ['build']);
+  gulp.watch('src/data/**/*', ['pages']);
+});
+
+gulp.task('build', [
+  'clean',
+  'template',
+  'pages',
+  'javascript',
+  'static'
+]);
+
+gulp.task('default', [
+  'build',
+  'watch',
+  'http-server'
+]);
