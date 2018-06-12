@@ -13,7 +13,7 @@ const gulpRename   = require('gulp-rename');
  */
 
 gulp.task('compress-images', () => gulp
-  .src(['./src/**/*.+(jpg|jpeg|gif|png|svg)', './src/**/*.min.*'])
+  .src(['./src/**/*.+(jpg|jpeg|gif|png|svg)', '!./src/**/*.min.*'])
   .pipe(gulpRename((path) => {
     path.extname = '.min' + path.extname;
   }))

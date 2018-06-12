@@ -3,10 +3,13 @@
 const gulpHtmlmin = require('gulp-htmlmin');
 const gulpPug     = require('gulp-pug');
 const gulpRename  = require('gulp-rename');
+const path        = require('path');
+const process     = require('process');
+const sass        = require('node-sass');
 
 let gulpComposedPipesPug = (context) => {
   let options = context.options;
-  console.log(context);
+  console.log(options.pug);
   return [
     gulpComposedPipesPug.pipePug(options),
     gulpComposedPipesPug.pipeHtmlMin(options),
@@ -19,11 +22,11 @@ gulpComposedPipesPug.pipePug = function(options) {
 }
 
 gulpComposedPipesPug.remappedRootRequire = function(remapRootToPath) {
-  return (path) => {
-    if(path.startsWith('/')) path = remapRootToPath + path;
+  return (p) => {
+    if(p.startsWith('/')) p = path.join(process.cwd(), remapRootToPath, p);
     // For hot reloading we don't want to cache
-    delete require.cache[require.resolve(path)]
-    return require(path);
+    delete require.cache[require.resolve(p)]
+    return require(p);
   }
 }
 

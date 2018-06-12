@@ -14,7 +14,7 @@ options.sass = {
 };
 
 options.pug = {
-  basedir: this.sourceFolder,
+  basedir: options.sourceFolder,
   filters: {
     sass: gulpComposedPipesPug.sassFilterPug(options.sass)
   },

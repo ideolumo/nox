@@ -11,7 +11,10 @@ module.exports = (context) => {
       ...gulpComposedPipesPug(context),
       gulp.dest('./build'),
       context.browserSync.stream()
-    ], cb);
+    ], function(err) {
+      console.log('pipe finished', err)
+      cb(err);
+    });
   });
 
   /**
