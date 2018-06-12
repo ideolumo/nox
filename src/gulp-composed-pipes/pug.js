@@ -9,7 +9,7 @@ const sass        = require('node-sass');
 
 let gulpComposedPipesPug = (context) => {
   let options = context.options;
-  console.log(options.pug);
+  console.log(process.cwd());
   return [
     gulpComposedPipesPug.pipePug(options),
     gulpComposedPipesPug.pipeHtmlMin(options),
