@@ -43,7 +43,7 @@ gulpComposedPipesPug.sassFilterPug = function(optionsSass) {
     let result;
     try {
       result = sass.renderSync(sassOpt)
-    catch(err) {
+    } catch(err) {
       throw new Error(`Error: ${err.message} on line ${err.line} on position ${err.column} in file ${options.filename}`);
     }
     return result.css.toString();
