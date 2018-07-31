@@ -40,7 +40,13 @@ gulpComposedPipesPug.sassFilterPug = function(optionsSass) {
       includePaths: [pathToFile, optionsSass.includePaths],
       ...optionsSass
     };
-    return sass.renderSync(sassOpt).css.toString();
+    let result;
+    try {
+      result = sass.renderSync(sassOpt)
+    catch(err) {
+      throw new Error(`Error: ${err.message} on line ${err.line} on position ${err.column} in file ${options.filename}`);
+    }
+    return result.css.toString();
   }
 }
 
