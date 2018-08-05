@@ -22,9 +22,12 @@ let gulpComposedPipesPug = (context) => {
 gulpComposedPipesPug.pipeData = function(options) {
   return gulpData((file) => {
     let filepath = file.history[0]
+    let pathToNoxProjectSrc = path.join(process.cwd(), 'src')
+    let dirname = filepath.substring(pathToNoxProjectSrc.length)
+    console.log(dirname)
     return {
       pugFile: {
-        dirname: path.dirname(filepath),
+        dirname: dirname,
         basename: path.basename(filepath),
         filepath: filepath,
         file: file
