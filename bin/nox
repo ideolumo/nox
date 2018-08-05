@@ -89,7 +89,7 @@ function applyLogs(gulpInstance) {
   gulpInstance.on('task_not_found', function(err) {
     console.error('Task \'' + err.task + '\' is not in your gulpfile');
     console.error('Please check the documentation for proper gulpfile formatting');
-    exit(1);
+    process.exit(1);
   });
 }
 
