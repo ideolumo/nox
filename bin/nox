@@ -48,6 +48,26 @@ EXAMPLES:
 `)
 }
 
+// Format orchestrator errors
+function formatError(e) {
+  if (!e.err) {
+    return e.message;
+  }
+
+  // PluginError
+  if (typeof e.err.showStack === 'boolean') {
+    return e.err.toString();
+  }
+
+  // Normal error
+  if (e.err.stack) {
+    return e.err.stack;
+  }
+
+  // Unknown (string, number, etc.)
+  return new Error(String(e.err)).stack;
+}
+
 function applyLogs(gulpInstance) {
   // Exit with 0 or 1
   var failed = false;
@@ -76,14 +96,13 @@ function applyLogs(gulpInstance) {
   });
 
   gulpInstance.on('task_err', function(e) {
-    var msg = e;
     var time = e.hrDuration;
     console.error(
       '\'' + e.task + '\'',
       'errored after',
       time
     );
-    console.error(msg);
+    console.error(formatError(e));
   });
 
   gulpInstance.on('task_not_found', function(err) {

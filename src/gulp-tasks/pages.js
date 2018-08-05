@@ -12,7 +12,6 @@ module.exports = (context) => {
       gulp.dest('./build'),
       context.browserSync.stream()
     ], function(err) {
-      console.log('pipe finished', err)
       cb(err);
     });
   });

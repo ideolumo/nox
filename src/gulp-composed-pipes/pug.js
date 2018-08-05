@@ -23,7 +23,6 @@ gulpComposedPipesPug.pipeData = function(options) {
   return gulpData((file) => {
     let pathToNoxProjectSrc = path.join(process.cwd(), 'src')
     let filepath = file.history[0].substring(pathToNoxProjectSrc.length)
-    console.log(dirname)
     return {
       pugFile: {
         dirname: path.dirname(filepath),
