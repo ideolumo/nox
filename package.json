@@ -13,12 +13,14 @@
   },
   "author": "",
   "license": "ISC",
+  "bin": {
+    "nox": "bin/nox"
+  },
   "dependencies": {
     "browser-sync": "^2.24.6",
     "del": "^3.0.0",
-    "gulp": "^4.0.0",
+    "gulp": "3.9.1",
     "gulp-clean-css": "^3.9.4",
-    "gulp-cli": "^2.0.1",
     "gulp-htmlmin": "^4.0.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-pug": "git+https://github.com/jikstra/gulp-pug#fix_add_filename_to_error",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-plugin-sort-requires": "^2.1.0",
+    "gulp-cli": "^2.0.1",
     "mocha": "^5.2.0",
     "should": "^13.2.3"
   }

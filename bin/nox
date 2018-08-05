@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+const gulp           = require('gulp')
+const browserSync    = require('browser-sync').create();
+const process        = require('process');
+
+
+function parseOptions(args) {
+  let context = {
+    initCwd: process.env.INIT_CWD || process.cwd(),
+    options: require('../src/default-options'),
+    browserSync
+  }
+
+  for(let i=0;i<args.length;i++) {
+    let arg = args[i]
+    if(arg == '--cwd') {
+      
+    }
+  
+    console.log(arg)
+  }
+
+  return context
+}
+
+function help() {
+  console.log(`nox [OPTIONS...] {COMMAND}
+
+Build a static site using nox
+
+OPTIONS:
+  --cwd         Set the folder where the nox project is. Defaults to the
+                directory this command is run from.
+
+COMMANDS:
+  start
+  build
+  watch
+  verify
+
+EXAMPLES:
+  1. Starts the development web server & watches for changes 
+     $ nox
+  
+  2. Only build the website, the nox project lays in ./nox_project
+     $ nox --cwd ./nox_project build
+`)
+}
+
+function main(args) {
+  let context = parseOptions(args)
+
+  require('../src/register-gulp-tasks')(context)
+
+  let tasks = ['default']
+  
+  if(args.length > 0) {
+    if(args[0] == 'build') {
+      tasks = ['build']
+    } else if(args[0] == 'watch') {
+      tasks = ['watch'] 
+    } else if(args[0] == 'start') {
+      tasks = ['default']
+    } else if(args[0] == 'help' || args[0] == '-h' || args[0] == '--help') {
+      return help()
+    } else {
+      throw new Error('Unknown command ' + args[0])
+    }
+  }
+  gulp.start(...tasks);
+}
+
+main(process.argv.slice(2));
+
