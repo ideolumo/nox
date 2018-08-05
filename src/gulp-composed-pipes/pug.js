@@ -1,5 +1,6 @@
 'use strict';
 
+const gulpData    = require('gulp-data');
 const gulpHtmlmin = require('gulp-htmlmin');
 const gulpPug     = require('gulp-pug');
 const gulpRename  = require('gulp-rename');
@@ -11,10 +12,25 @@ let gulpComposedPipesPug = (context) => {
   let options = context.options;
   console.log(process.cwd());
   return [
+    gulpComposedPipesPug.pipeData(options),
     gulpComposedPipesPug.pipePug(options),
     gulpComposedPipesPug.pipeHtmlMin(options),
     gulpComposedPipesPug.pipeRenameExtension(options),
   ];
+}
+
+gulpComposedPipesPug.pipeData = function(options) {
+  return gulpData((file) => {
+    let filepath = file.history[0]
+    return {
+      pugFile: {
+        dirname: path.dirname(filepath),
+        basename: path.basename(filepath),
+        filepath: filepath,
+        file: file
+      }
+    }
+  });
 }
 
 gulpComposedPipesPug.pipePug = function(options) {
