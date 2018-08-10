@@ -5,13 +5,14 @@ const gulp                 = require('gulp');
 const pump                 = require('pump');
 
 module.exports = (context) => {
-  gulp.task('pages-pug', (cb) => {
-    pump([
-      gulp.src(['src/pages/**/*.pug', '!src/pages/**/_*.pug']),
-      ...gulpComposedPipesPug(context),
-      gulp.dest('./build'),
-      context.browserSync.stream()
-    ], cb);
+  gulp.task('pages-pug', function(cb) {
+    return pump(
+      [
+        gulp.src(['src/pages/**/*.pug', '!src/pages/**/_*.pug']),
+        ...gulpComposedPipesPug(context),
+        gulp.dest('./build'),
+        context.browserSync.stream()
+      ], (err) => {if(err) throw err});
   });
 
   /**
