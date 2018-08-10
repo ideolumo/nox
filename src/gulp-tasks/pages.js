@@ -11,9 +11,7 @@ module.exports = (context) => {
       ...gulpComposedPipesPug(context),
       gulp.dest('./build'),
       context.browserSync.stream()
-    ], function(err) {
-      cb(err);
-    });
+    ], cb);
   });
 
   /**
