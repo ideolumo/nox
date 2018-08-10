@@ -1,6 +1,7 @@
 'use strict'
 
 const gulp = require('gulp');
+const gulpWatch = require('gulp-watch');
 
 
 module.exports = (context) => {
@@ -20,9 +21,15 @@ module.exports = (context) => {
     'static'
   ]);
 
-  gulp.task('watch', () => {
+  gulp.task('watch-pages', () => {
+    return gulpWatch('src/pages/**/*', { ignoreInitial: false }, vinyl => {
+      gulp.start('pages')
+    })
+  });
+
+  gulp.task('watch-others', () => {
     gulp.watch(['package.json'], ['build']);
-    gulp.watch(['src/pages/**/*.*'], ['pages']);
+    //gulp.watch(['src/pages/**/*.*'], ['pages']);
     gulp.watch('src/css/**/*.sass', ['sass']);
     gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch(['src/static/**/*', 'src/static/**/.*'], ['static']);
@@ -30,6 +37,11 @@ module.exports = (context) => {
     gulp.watch('src/components/**/*', ['build']);
     gulp.watch('src/data/**/*', ['pages']);
   });
+
+  gulp.task('watch', [
+    'watch-pages',
+    'watch-others'
+  ]);
 
   gulp.task('default', [
     'build',
