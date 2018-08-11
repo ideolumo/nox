@@ -25,11 +25,12 @@ module.exports = (context) => {
     return gulpWatch('src/pages/**/*', { ignoreInitial: false }, vinyl => {
       gulp.start('pages')
     })
-  });
+  })
 
   gulp.task('watch-others', () => {
     gulp.watch(['package.json'], ['build']);
     //gulp.watch(['src/pages/**/*.*'], ['pages']);
+    gulp.watch('src/partials/**/*', ['build']);
     gulp.watch('src/css/**/*.sass', ['sass']);
     gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch(['src/static/**/*', 'src/static/**/.*'], ['static']);
