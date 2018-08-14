@@ -19,6 +19,11 @@ let gulpComposedPipesPug = (context) => {
   ];
 }
 
+/**
+ * Pipe which uses gulp-data to inject a pugFile global object
+ * into all pug templates which holds informations about the path
+ * of the currently processed pug template.
+ */
 gulpComposedPipesPug.pipeData = function(options) {
   return gulpData((file) => {
     let pathToNoxProjectSrc = path.join(process.cwd(), 'src')
