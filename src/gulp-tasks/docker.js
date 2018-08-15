@@ -12,9 +12,10 @@ module.exports = (context) => {
   /**
    * Task: docker-compose
    *
-   * Run docker-compose.yml from ./docker.
+   * Executes docker-compose with the docker-compose.yml found in the current
+   * folder or falling back to the default nox docker-compose.yml file.
    */
-  gulp.task('docker-compose', () => {
+  gulp.task('docker', () => {
     let docker = childProcess
       .spawn('docker-compose', ['-f', pathToDocker, 'up']);
 

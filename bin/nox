@@ -24,7 +24,7 @@ function parseOptions(args) {
 }
 
 function help() {
-  console.log(`nox [OPTIONS...] {COMMAND}
+  console.log(`nox [OPTIONS...] {COMMAND} [COMMAND OPTIONS]
 
 Build a static site using nox
 
@@ -33,20 +33,30 @@ OPTIONS:
                 directory this command is run from.
 
 COMMANDS:
-  start
-  build
-  build-watch
-  watch
-  clean
-  verify
-  task
+  start                    Starts the default development environment 
+  build                    Builds the project
+  build-watch              Continously builds the project and watches for changes
+  build-watch-sync         Same as build-watch but also runs browser-sync
+  docker                   Only run the docker file without browser-sync
+  clean                    Cleans the build folder
+  verify <file.[pug|sass]> Verify a pug/sass file       
+  run <task1> [task2...]   Run one or more (gulp) tasks. 
 
 EXAMPLES:
-  1. Starts the development web server & watches for changes 
+  1. Starts the development web server & watches for changes, same as nox start. 
      $ nox
   
   2. Only build the website, the nox project lays in ./nox_project
      $ nox --cwd ./nox_project build
+
+  3. Only run docker-compose
+     $ nox run docker-compose
+  
+  4. Build the project, watch for changes and run browser-sync (without docker)
+     $ nox build-watch-sync
+
+  5. Only run docker
+     $ nox docker
 `)
 }
 
@@ -127,13 +137,15 @@ function main(args) {
       tasks = ['build']
     } else if(args[0] == 'build-watch') {
       tasks = ['build', 'watch']
-    } else if(args[0] == 'watch') {
-      tasks = ['watch']
+    } else if(args[0] == 'build-watch-sync') {
+      tasks = ['build', 'watch', 'browser-sync']
+    } else if(args[0] == 'docker') {
+      tasks = ['docker']
     } else if(args[0] == 'start') {
       tasks = ['default']
     } else if(args[0] == 'clean') {
       tasks = ['clean']
-    } else if(args[0] == 'task') {
+    } else if(args[0] == 'run') {
       tasks = args.slice(1)
     } else if(args[0] == 'help' || args[0] == '-h' || args[0] == '--help') {
       return help()
