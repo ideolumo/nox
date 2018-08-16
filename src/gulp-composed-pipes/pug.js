@@ -28,14 +28,13 @@ gulpComposedPipesPug.pipeData = function(options) {
   return gulpData((file) => {
     let pathToNoxProjectSrc = path.join(process.cwd(), 'src')
     let filepath = file.history[0].substring(pathToNoxProjectSrc.length)
-    return {
-      pugFile: {
-        dirname: path.dirname(filepath),
-        basename: path.basename(filepath),
-        filepath: filepath,
-        file: file
-      }
-    }
+
+    let _PUGF = path.parse(filepath)
+    _PUGF.root = pathToNoxProjectSrc
+    _PUGF.file = file
+    _PUGF.path = filepath
+
+    return {_PUGF}
   });
 }
 
