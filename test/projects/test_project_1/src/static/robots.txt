@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /images/
-Allow: /images/makespace_logo.min.svg
-Allow: /images/size_8.min.svg
-Allow: /images/header_home_tablet.min.png
