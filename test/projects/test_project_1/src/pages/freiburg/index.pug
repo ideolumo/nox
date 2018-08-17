@@ -1,0 +1,56 @@
+extends /template/template.pug
+    
+block imports
+    - current_path = PATH_LANDINGPAGE
+    style
+        include:sass freiburg.sass
+        
+block content
+    //Teaser
+    section.teaser.home
+        .text-teaser
+            h1 MOBILE SELFSTORAGE für Freiburg
+            p Sie suchen Lagerraum - wir haben die Lösung
+    // Content
+    // Intro
+    .wrapper
+        section.text-centered.intro-home
+            h2
+                | Sie suchen Lagerraum bzw. Einlagerungsmöglichkeit für </br>
+                | FREIBURG und die Region?
+            p
+                | Wir bieten mit unserem <strong>MOBILE SELFSTORAGE</strong>
+                | Konzept eine Lösung für Freiburg. Egal ob
+                strong  Student/in, Mieter/in, Hausbesitzer/in, Firmeninhaber/in
+                |  uvm. - Jeder hat sich schon einmal die Frage gestellt:
+                strong  Wohin mit all den Sachen?
+
+    //icons
+    section#loesung
+        .wrapper
+            section.text-centered
+                h2 Die Lösung für Freiburg:
+            .col_1_3
+                .circle
+                    p
+                    b 1
+                .icon
+                    img(src='images/icon-1.min.svg', alt='Icon Lagerbox - selfstorage')
+                .steps
+                    h3 Lagerbox befüllen
+            .col_1_3
+                .circle
+                    p
+                    b 2
+                .icon
+                    img(src='images/icon-2.min.svg', alt='Icon Einlagerung')
+                .steps
+                    h3 Einlagerung
+            .col_1_3
+                .circle
+                    p
+                    b 3
+                .icon
+                    img(src='images/icon-3.min.svg', alt='Icon sichere Verwahrung')
+                .steps
+                    h3 sichere Verwahrung

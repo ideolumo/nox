@@ -1,0 +1,155 @@
+extends /template/template.pug
+    
+block meta
+    meta(name='robots' content='index,follow')
+
+block imports
+    - current_path = PATH_HOME
+    style
+        include:sass home.sass 
+
+block script
+    include /components/slider/slider.js
+
+block content
+    include /components/slider/slider
+    - let containerPrices = require('/data/container_prices.json')
+    include _mixins
+    
+    // Teaser
+    section.teaser.home
+        .text-teaser
+            h1 MOBILE SELFSTORAGE im Südschwarzwald
+            p Ob Möbel, Motorrad, Oldtimer, Boot, Surfbrett oder Akten
+    // Content
+    // Intro
+    .wrapper
+        section.text-centered.intro-home
+            // alternative zu <br> ... list?
+            h2
+                | Vom Fahrrad bis zur Luxuskarosse haben </br> wir den richtigen
+                | Platz für Sie!
+            p
+                | Sie suchen Lagerraum für Ihr Hab und Gut? Da sind Sie bei uns
+                | genau richtig. Wir bieten Ihnen ein einfaches und unkompliziertes
+                | <strong>MOBILE SELFSTORAGE</strong> Konzept für die 
+                | <strong>Region Schwarzwald</strong>. Unsere mobile Lösung ist
+                | Ihre Sorgenfreiheit wenn es um das Thema Selfstorage geht.
+            h3 Und so funktioniert es:
+
+        +step-box(
+            'Lagerbox befüllen',
+            'assets/icons/images/icon-1.min.svg',
+            'Icon Lagerbox - selfstorage'
+        )
+            ul.centered-list
+                li Anlieferung direkt vor Ihre Haustüre
+                li in Ruhe beladen und versiegeln
+                li unsere Abholung
+
+        +step-box(
+            'Einlagerung',
+            'assets/icons/images/icon-2.min.svg',
+            'Icon Einlagerung'
+        )
+            ul.centered-list
+                li Transport in das Großlager
+                li Einlagerung im Außenlager
+
+        +step-box(
+            'sichere Verwahrung',
+            'assets/icons/images/icon-3.min.svg',
+            'Icon sichere Verwahrung'
+        )
+            ul.centered-list
+                li komplette Videoüberwachung
+                li Zugang nach Absprache
+                li beheizt in 
+                    a(href=PATH_FEATURES + '#megabox' title='genauere Infos')
+                        | MAKESPACE Megabox
+            #circle
+                a(href=PATH_FEATURES + '#megabox' title='genauere Infos')
+                    p
+                    b NEU!
+    // Sizes
+    section#sizes
+        .wrapper
+            section.text-centered
+                h2 Wählen Sie die passende Größe
+
+            +container-box(
+                'S',
+                'assets/container/images/size_8.min.svg',
+                'Größe S - Lagerbox 8'
+            )
+                +container-box-price(containerPrices.lagerbox_s.locally.monthly)
+                +container-box-info('LAGERBOX 8\'', '2,27 x 2,1 x 2,05', '9,82')
+            
+            +container-box(
+                'M',
+                'assets/container/images/size_15.min.svg',
+                'Größe M - Lagerbox 15'
+            )
+                +container-box-price(containerPrices.lagerbox_m.locally.monthly, true)
+                +container-box-info('LAGERBOX 15\'', '4,38 x 2,1 x 2,05', '18,94')
+                    
+            +container-box(
+                'XXL',
+                'assets/container/images/size_xxl.min.svg',
+                'Größe XXL - Lagerbox XXL'
+            )
+                +container-box-price(containerPrices.lagerbox_xxl.locally.monthly, true)
+                +container-box-info('LAGERBOX XXL', '8,84 x 2,9 x 2,78', '71,52')
+                    
+            #mwst
+                p * Alle Preise verstehen sich zzgl. MwSt. 
+            
+            section.text-centered.more
+                a.button(href=PATH_PREISE + '#start-sizes' title='alle Größen der makespace Lagerbox')
+                    | MEHR GRÖSSEN
+    // call-to-action + Feedback
+    .wrapper
+        section.text-centered
+            h2 
+                | Egal was, wie schwer, wie breit oder wie hoch </br> wir finden
+                | eine Lösung für Ihr Hab und Gut
+
+            section#slider-home-content
+                +slider('home-content')
+                    +slider_image('home/images/slider/sport.min.png')
+                    +slider_image('home/images/slider/boxes.min.png')
+                    +slider_image('home/images/slider/cement.min.png')
+                    +slider_image('home/images/slider/auto.min.png')
+                    +slider_image('home/images/slider/buero.min.png')
+                    +slider_image('home/images/slider/music.min.png')
+                    +slider_image('home/images/slider/tyres.min.png')
+                    +slider_image('home/images/slider/haus.min.png')
+                    +slider_image('home/images/slider/rolls.min.png')
+
+            h3 Fragen Sie uns direkt an
+            #arrow_down
+                img(src='home/images/arrow.min.png', alt='Pfeil zum Button')
+            a.button.big(href=PATH_KONTAKT title='Nehmen Sie Kontakt mit uns auf')
+                | KONTAKT AUFNEHMEN
+
+        //- section#feedback
+            section.text-centered
+                h2 Das sagen die Kunden über uns
+            .col_1_3
+                img(src='images/feedback3.min.svg', alt='Bewertung 1')
+                p
+                    | "Hier könnte eine Kundenmeinung stehen, die von der Zufriedenheit des Kunden zeugt!"
+                p.sub
+                    | Peter Muster
+            .col_1_3
+                img(src='images/feedback.min.svg', alt='Bewertung 2')
+                p
+                    | "Hier könnte eine Kundenmeinung stehen, die von unserer zuverlässigen und professionellen Arbeit zeugt!"
+                p.sub
+                    | Hans Muster
+            .col_1_3
+                img(src='images/feedback4.min.svg', alt='Bewertung 3')
+                p
+                    | "Hier könnte eine Kundenmeinung stehen, die durchweg positiv und überzeugend ist."
+                p.sub
+                    | Eva Muster

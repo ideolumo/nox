@@ -1,0 +1,29 @@
+@import 'config/constants.sass'
+
+.header_features
+    background-image: url(features/images/teaser_features_desktop.min.png)
+    @media only screen and (min-width: $media_sm_min_width) and (max-width: 1024px)
+        background-image: url(features/images/teaser_features_tablet.min.png)
+    @media only screen and (max-width: $media_xs_max_width)
+        background-image: url(features/images/teaser_features_phone.min.png)
+
+#features
+    margin-bottom: 30px
+    h2
+        margin-bottom: 10px
+
+.features
+    margin: 30px 0
+    padding: 0 25px
+    border: 1px solid $color_mercury_approx
+    border-radius: 5px
+    padding: 24px
+    a
+        text-decoration: none
+        color: $color_salem_approx
+    p
+        text-align: justify
+
+.icon2
+    width: 40%
+    margin-left: 30%

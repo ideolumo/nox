@@ -1,0 +1,254 @@
+@import 'config/constants'
+
+.header_preise
+    background-image: url(preise/images/teaser_preise_desktop.min.png)
+    @media only screen and (min-width: $media_sm_min_width) and (max-width: 1024px)
+        background-image: url(preise/images/teaser_preise_tablet.min.png)
+    @media only screen and (max-width: 767px)
+        background-image: url(preise/images/teaser_preise_phone.min.png)
+    a
+        color: $white
+        &:hover
+            color: $color_tarawera_approx
+
+.month-selection
+    text-align: center
+    margin-bottom: -25px
+    margin-top: 25px
+    @media only screen and (max-width: $media_xs_max_width)
+        margin-bottom: -20px
+    .month-button
+        background-color: $real-white
+        border: none
+        color: $color_tarawera_approx
+        cursor: pointer
+        margin: 0 -4px
+        outline: none
+        border-radius: 4px
+        p
+            border: 1px solid $color_tarawera_approx
+            padding: 12px 22px
+            font-family: $font_0, $font_1
+            font-size: 24px
+            font-weight: 500
+            @media only screen and (max-width: $media_xs_max_width)
+                padding: 6px 10px
+                font-size: 15px
+    .month-button.selected
+        p
+            background-color: $color_tarawera_approx
+            color: $real-white
+    p#start
+        border-radius: 4px 0 0 4px
+    p#end
+        border-radius: 0 4px 4px 0
+
+#sizes-background
+    background-color: $color_regent_gray_approx
+
+#start-sizes
+    margin: 40px 0
+
+#sizes2
+    padding: 75px 0
+    p.other-prices
+        font-size: 12px
+        line-height: 20px
+        u
+            color: $color_tarawera_approx
+            cursor: pointer
+        u span
+            display: none
+        u
+            position: relative
+            padding-right: 4px
+            &:hover
+                span
+                    display: block
+                    position: absolute
+                    border-radius: 4px
+                    background-color: $color_tarawera_approx
+                    color: $real-white
+                    font-size: 14px
+                    line-height: 19px
+                    padding: 20px
+                    text-align: center
+                    bottom: 23px
+                    left: -40px
+                    width: 208px
+                    z-index: 2
+                span::before
+                    display: block
+                    position: absolute
+                    content: ''
+                    top: 168px
+                    right: 149px
+                    border-top: 11px solid $color_tarawera_approx
+                    border-right: 11px solid transparent
+                    border-left: 11px solid transparent
+        u#innenlager
+            position: relative
+            &:hover
+                span
+                    bottom: 21px
+                    left: -55px
+                span::before
+                    top: 206px
+                    right: 158px
+
+            //span
+                display: none
+        //u
+            &hover
+                span
+                    display: block
+                    position: absolute
+                    border-radius: 4px
+                    background-color: $color_tarawera_approx
+                    color: $white
+                    font-size: 14px
+                    line-height: 18px
+                    padding: 20px
+                    text-align: center
+                    bottom: 33px
+                    right: -11px
+                    width: 221px
+                    z-index: 2
+
+    .notice-container
+        display: none
+        position: absolute
+        border-radius: 4px
+        background-color: $color_tarawera_approx
+        color: $white
+        font-size: 14px
+        line-height: 18px
+        padding: 20px
+        text-align: center
+        bottom: 33px
+        right: -11px
+        width: 221px
+        z-index: 2
+
+#mwst
+    margin-left: 1%
+    margin-bottom: 5px
+    color: $real-white
+    @media only screen and (min-width: $media_sm_min_width) and (max-width: $media_md_min_width)
+        margin-left: 2.5%
+    @media only screen and (max-width: $media_xs_max_width)
+        margin-left: 4%
+
+#safety
+    background-color: $color_blue_bayoux_approx
+    color: $white
+    color: #fff
+    .col_1_3
+        width: 250px
+        margin: 0 35px 30px
+        @media only screen and (min-width: $media_sm_min_width) and (max-width: $media_md_min_width)
+            width: 28.3%
+            margin: 0 2.5% 30px 2.5%
+        @media only screen and (max-width: $media_xs_max_width)
+            width: 80%
+            margin-left: 10%
+            margin-right: 10%
+
+
+.safety
+    color: $color_tuatara_approx
+    text-align: center
+    background-color: $color_mercury_approx
+    padding: 20px 10px
+    border-radius: 0 0 5px 5px
+    hr
+        margin: 20px
+        border-color: $color_tuatara_approx
+        border-width: 0.5px
+
+.silver-top
+    background-color: $color_aluminium_approx
+    border-radius: 5px 5px 0 0
+    h3
+        margin: 0
+        color: $white
+        text-align: center
+        padding: 20px 0
+
+
+.gold-top
+    background-color: $color_harvest_gold_approx
+    border-radius: 5px 5px 0 0
+    h3
+        margin: 0
+        color: $white
+        text-align: center
+        padding: 20px 0
+
+.basic-top
+    background-color: $color_salem_approx
+    border-radius: 5px 5px 0 0
+    h3
+        margin: 0
+        color: $white
+        text-align: center
+        padding: 20px 0
+
+.basic hr
+    border: 0.5px solid $color_salem_approx
+
+.silver hr
+    border: 0.5px solid $color_aluminium_approx
+
+.gold hr
+    border: 0.5px solid $color_harvest_gold_approx
+
+.transport
+    color: $color_tuatara_approx
+    text-align: center
+    //background-color: $color_mercury_approx
+    border: 1px solid $color_mercury_approx
+    border-top: none
+    padding: 20px 10px
+    border-radius: 0 0 5px 5px
+    hr
+        margin: 20px
+        border: 0.5px solid $color_salem_approx
+    .price p.after-price
+        font-size: 12px
+        position: absolute
+        top: 15px
+        right: -128px
+        left: 0px
+        @media only screen and (min-width: $media_sm_min_width) and (max-width: $media_md_min_width)
+            right: -115px
+
+.text-padding
+    p
+        padding: 0 128px
+        margin: 40px 0
+    @media only screen and (max-width: $media_xs_max_width)
+        p
+            padding: 0
+
+#icon-transport
+    width: 24%
+    margin-left: 38%
+    @media only screen and (max-width: $media_xs_max_width)
+        width: 140px
+        margin: 0 auto
+
+#transport .top
+    background-color: $color_salem_approx
+    h3
+        color: $white
+
+#transport .col_1_2
+    width: 250px
+    margin: 0 115px 30px
+    @media only screen and (min-width: $media_sm_min_width) and (max-width: $media_md_min_width)
+        width: 30%
+        margin: 0 10% 5%
+    @media only screen and (max-width: $media_xs_max_width)
+        width: 80%
+        margin: 5% 10%

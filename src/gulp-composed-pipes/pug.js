@@ -31,6 +31,7 @@ gulpComposedPipesPug.pipeData = function(options) {
 
     let _PUGF = path.parse(filepath)
     _PUGF.root = pathToNoxProjectSrc
+    _PUGF.page = path.basename(_PUGF.dir)
     _PUGF.file = file
     _PUGF.path = filepath
 

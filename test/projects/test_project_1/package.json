@@ -1,0 +1,17 @@
+{
+  "name": "makespace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp -f ./node_modules/nox/src/gulpfile.js --cwd .",
+    "build": "gulp -f ./node_modules/nox/src/gulpfile.js --cwd . build",
+    "clean": "gulp -f ./node_modules/nox/src/gulpfile.js --cwd . clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nox": "git://github.com/ideolumo/nox.git"
+  }
+}

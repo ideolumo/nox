@@ -1,0 +1,34 @@
+.slider
+    .image
+        display: flex
+        flex-direction: row
+        .control_button
+            width: 5%
+            align-self: center
+            font-weight: 600
+            font-size: 35px
+            cursor: pointer
+            &.left:after
+                content: '<'
+            &.right:after
+                content: '>'
+                
+        .current_picture
+            width: 90%
+            align-self: flex-start
+
+    .dots
+        margin-top: 5px
+        padding-bottom: 50px
+        width: 100%
+        display: flex
+        flex-direction: row
+        justify-content: center
+        .dot
+            height: 10px
+            width: 10px
+            margin: 10px
+            background-color: #e6e6e6
+            border-radius: 50%
+            &.active
+                background-color: #d34345

@@ -1,0 +1,45 @@
+mixin preis_box(name, inch, id, innenmass, gesamtvolumen, img, img_alt)
+    - let preis_aussen = containerPrices[id].outdoor.monthly
+    - let preis_innen = containerPrices[id].indoor.monthly
+    - let preis_vorort = containerPrices[id].locally.monthly
+
+    div(class='col_1_3 price_box', id=id)
+        .top
+            h3= name
+        .sizes
+            .box
+                img(src='assets/container/' + img, alt=img_alt)
+            .price.innen
+                p.before-price €
+                p.middle-price= preis_aussen
+                p.after-price /Monat*
+            hr
+            p.other-prices
+                u Stellplatz vor Ort:
+                    span 
+                        strong Stellplatz vor Ort
+                        | beschreibt die günstigste Variante unseres SELFSTORAGE
+                        | Konzeptes. Haben Sie einen eigenen passenden Stellplatz
+                        | liefern wir die Lagerbox und stationieren diese am Ort
+                        | Ihrer Wahl. 
+                strong.vorort= preis_vorort + ' €/Monat*'
+
+                br
+                u#innenlager Innenlager:
+                    span
+                        strong Innenlager
+                        | beschreibt die preislich höchste Variante unseres
+                        | SELFSTORAGE Konzeptes. Ihre Lagerbox wird in der
+                        | makespace MEGA-BOX eingelagert, einer beheizten
+                        | Lagerhalle mit 14 t Krananlage inkl. modernster
+                        | Überwachungstechnik.
+                if preis_innen == null
+                    strong.innenlagernd  nicht möglich
+                else
+                    strong.innenlagernd= preis_innen + ' €/Monat*'
+            h4= 'LAGERBOX ' + inch + '\''
+            p
+                |  Innenmaß: </br>
+                | <strong>#{innenmass}</strong> </br>
+                | #{gesamtvolumen} m³ Gesamtvolumen
+            a.button(rel='nofollow' href=PATH_KONTAKT + '?box=' + id + '#start-kontakt' title='senden Sie uns eine Anfrage') ANFRAGE

@@ -1,0 +1,21 @@
+
+mixin menu
+    nav
+        input#menuToggle(type='checkbox')
+        div(class="hamburger")
+            span
+            span
+            span
+        ul(class="menu")
+            block
+    
+mixin _menu_entry(name, link, active)
+    li(class=active ? "active" : "" class=block ? 'submenu' : '')
+        a(href=link)
+            div(class="entry" class=block ? "not-clickable" : '')= name
+            if block
+                ul(class="submenu-content")
+                    block
+
+mixin menu_entry(name, link)
+    +_menu_entry(name, link, link === current_path)

@@ -1,0 +1,93 @@
+extends ../../template/template.pug
+    
+block imports
+    - current_path = PATH_PREISE
+    - var containerPrices = require('/data/container_prices.json')
+    style
+        include:sass preise.sass
+        
+block script
+    != 'const containerPrices = ' + JSON.stringify(containerPrices) + ';'
+    include preise.js
+
+block content
+    include _mixins
+    // Teaser
+    section.teaser.header_preise
+        .text-teaser
+            h1 ALLE PREISE AUF EINEN BLICK
+            p
+                strong
+                    a(href='assets/makespace_preisliste.pdf' target='_blank' title='zur PDF') Hier
+                |  können Sie unsere komplette Preisliste als PDF herunterladen
+    // Content
+    // Intro
+    .wrapper
+        section.text-centered
+            h2 Übersicht und Preisliste der verschiedenen Lagerbox-Größen
+            h3#start-sizes
+                | Unsere <strong>Lagerboxen</strong> gibt es in
+                | <strong>fünf verschiedenen Abmessungen</strong>. </br>
+                | Wählen sie je nach Bedarf die passende <strong>Lagedauer</strong> 
+                |  und <strong>Größe</strong> aus:
+                
+        // Sizes
+    .month-selection
+        button.month-button.selected#monthly
+            p#start 1 Monat
+        button.month-button#biannually
+            p#middle 6 Monate
+        button.month-button#annually
+            p#end 12 Monate
+    section#sizes-background
+        .wrapper
+            #sizes2
+                +preis_box('S', 8, 'lagerbox_s', '2,27 x 2,1 x 2,05 m', '9,82', 'images/size_8.min.svg', 'Größe S - Lagerbox 8')
+                +preis_box('10\'', 10, 'lagerbox_10', '2,83 x 2,34 x 2,37 m', '15,76', 'images/size_10.min.svg', 'Lagerbox 10')
+                +preis_box('M', 15, 'lagerbox_m', '4,38 x 2,1 x 2,05 m', '18,94', 'images/size_15.min.svg', 'Lagerbox 15')
+                +preis_box('20\'', 20, 'lagerbox_20', '5,89 x 2,34 x 2,37 m', '32,85', 'images/size_20.min.svg', 'Lagerbox 20')
+                +preis_box('XXL', 'XXL', 'lagerbox_xxl', '8,84 x 2,9 x 2,78 m', '71,52', 'images/size_xxl.min.svg', 'Lagerbox XXL')
+        .wrapper    
+            #mwst
+                p * Alle Preise verstehen sich zzgl. MwSt. 
+
+    // Transport
+    section#transport
+        .wrapper
+            section.text-centered.text-padding
+                h2 Anlieferung und Abholung nach Ihren Wünschen
+                #icon-transport
+                    img(src='assets/icons/images/icon-7.min.svg', alt='Icon Transport')
+                p
+                    | Sie haben <strong>keinerlei Zeitdruck</strong> beim Be-
+                    | oder Entladen der Lagerbox. Wir berechnen lediglich die
+                    | Anfahrtskosten. Dafür bieten wir die folgenden
+                    | <strong>2 Pauschalpreise</strong>. Befinden Sie sich
+                    | außerhalb der Reichweite berechnen wir für 
+                    | <strong>weitere Kilometer 2,90 €/km</strong>.
+            .col_1_2
+                .top
+                    h3 bis 25 km
+                .transport
+                    .price
+                        p.before-price.before-long-price €
+                        p.middle-price 150
+                        p.after-price zzgl. MwSt.
+                    hr
+                    p
+                        | <strong>Anlieferung</strong> der Lagerbox bis  
+                        | <strong>25 km Entfernung</strong>, gemessen von
+                        | unserem Standort.
+            .col_1_2
+                .top
+                    h3 bis 50 km
+                .transport
+                    .price
+                        p.before-price.before-long-price €
+                        p.middle-price 190
+                        p.after-price zzgl. MwSt.
+                    hr
+                    p
+                        | <strong>Anlieferung</strong> der Lagerbox bis  
+                        | <strong>50 km Entfernung</strong>, gemessen von
+                        | unserem Standort.

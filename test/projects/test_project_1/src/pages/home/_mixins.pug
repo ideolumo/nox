@@ -1,0 +1,45 @@
+// Steps
+- let stepBoxCounter = 0
+mixin step-box(title, img, imgAlt)
+    - stepBoxCounter++
+    .col_1_3
+        .circle
+            p
+                b= stepBoxCounter
+        .icon
+            img(src=img, alt=imgAlt)
+        .steps
+            h3= title
+            block
+                
+mixin container-box(shortName, img, imgAlt)
+    .col_1_3
+        .top
+            h3= shortName
+        .sizes
+            .box
+                img(src=img, alt=imgAlt)
+            block
+
+mixin container-box-price(price, isLong)
+    .price
+        p.before-before-price(class={'before-long-price': isLong}) ab
+        p.before-price(
+            class={'only-home': !isLong}
+            class={'before-long-price': isLong}
+        ) €
+        p.middle-price= price
+        p.after-price.only-home(
+            class={'after-long-price': isLong}
+        ) /Monat*
+    hr
+
+mixin container-box-info(name, innenmaß, gesamtvolumen)
+    h4= name
+    p
+        |  Innenmaß: </br> <strong>#{innenmaß} m</strong></br>
+        |  #{gesamtvolumen} m³ Gesamtvolumen
+    a.button(
+        href=PATH_PREISE + '#start-sizes'
+        title='weitere Informationen zur Lagerbox'
+    ) MEHR INFOS

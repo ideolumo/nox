@@ -1,0 +1,17 @@
+include /config/constants
+- var current_path = ""
+
+doctype html
+head
+    include regions/head/head.pug
+    
+body
+    script(async src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=', crossorigin='anonymous')
+    script
+        block script
+    include regions/header/header.pug
+    #content
+        block content
+
+    #footer
+        include regions/footer/footer.pug

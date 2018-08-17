@@ -1,0 +1,42 @@
+$grid_xs_max_width: 767px !default
+$grid_sm_min_width: 768px !default
+$grid_md_min_width: 992px !default
+$grid_lg_min_width: 1200px !default
+
+.col_1_3, .col_1_2, .col_2_3
+    float: left
+    margin: 0 1% 30px 1%
+
+    $margin_lg: 1%
+    $margin_md: 2.5%
+    $margin_xs: 4%
+
+    $margin_bottom: 30px
+
+    @at-root .col_1_3
+        $width: 100 * (1/3)
+        width: $width - 2 * $margin_lg
+
+        @media only screen and (min-width: $grid_sm_min_width) and (max-width: $grid_md_min_width)
+            width: $width - 2 * $margin_md
+
+    @at-root .col_1_2
+        $width: 100 * (1/2)
+        width: $width - 2 * $margin_lg
+
+        @media only screen and (min-width: $grid_sm_min_width) and (max-width: $grid_md_min_width)
+            width: $width - 2 * $margin_md
+
+    @at-root .col_2_3
+        $width: 100 * (2/3)
+        width: $width - 2 * $margin_lg
+
+        @media only screen and (min-width: $grid_sm_min_width) and (max-width: $grid_md_min_width)
+            width: $width - 2 * $margin_md
+
+    @media only screen and (min-width: $grid_sm_min_width) and (max-width: $grid_md_min_width)
+        margin: 0 $margin_md $margin_bottom $margin_md
+
+    @media only screen and (max-width: $grid_xs_max_width)
+        width: 100% - 2 * $margin_xs
+        margin: 0 $margin_xs $margin-bottom $margin_xs
