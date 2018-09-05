@@ -60,3 +60,8 @@ typings/
 # next.js build output
 .next
 build
+
+# temporary ignore test stuff
+test
+test.js
+test.sh
