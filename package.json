@@ -1,6 +1,6 @@
 {
   "name": "@ideolumo/nox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "nox": "bin/nox"
   },
   "dependencies": {
+    "@ideolumo/gulp-pug": "^4.0.2",
     "browser-sync": "^2.24.6",
     "chalk": "^2.4.1",
     "del": "^3.0.0",
@@ -27,7 +28,6 @@
     "gulp-htmlmin": "^4.0.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-plumber": "^1.2.0",
-    "gulp-pug": "git+https://github.com/jikstra/gulp-pug#fix_add_filename_to_error",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.1",
