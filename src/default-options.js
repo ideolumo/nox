@@ -1,26 +1,26 @@
 'use strict';
 
-const gulpComposedPipesPug = require('./gulp-composed-pipes/pug');
+let options = {}
 
-
-let options = {
-  sourceFolder: './src',
-  buildFolder: './build',
-};
+options.dirs = {
+  source: '/tmp/src',
+  build: '/tmp/build',
+  static: 'static',
+}
 
 options.sass = {
   includePaths: [options.sourceFolder],
   outputStyle: 'compressed'
-};
+}
 
 options.pug = {
   basedir: options.sourceFolder,
   filters: {
-    sass: gulpComposedPipesPug.sassFilterPug(options.sass)
+    //sass: gulpComposedPipesPug.sassFilterPug(options.sass)
   },
   locals: {
-    require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
+    //require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
   }
-};
+}
 
-module.exports = options;
+module.exports = options

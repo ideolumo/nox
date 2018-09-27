@@ -17,6 +17,7 @@
     "nox": "bin/nox"
   },
   "dependencies": {
+    "browser-sync": "^2.24.7",
     "gulp": "^4.0.0",
     "gulp-composer": "git+https://github.com/IdeoLumo/gulp-composer.git"
   },

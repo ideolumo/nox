@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path')
 
 var taskSeries = (gc, context) => {
   /**
@@ -7,9 +8,14 @@ var taskSeries = (gc, context) => {
    *
    * Copy static assets
    */
+  let options = context.options
+
   gc.task('default', gc.fn(
-    gc.src('/tmp/static/**')
-      .pipe(gc.dest('/tmp/build/'))
+    gc.pump([
+      gc.src(path.join(options.dirs.source, options.dirs.static)),
+      gc.dest(path.join(options.dirs.build)),
+      context.SyncBrowser()
+    ])
   ))
 }
 
