@@ -2,7 +2,7 @@
 
 const path = require('path')
 
-var taskSeries = (gc, context) => {
+module.exports = (gc, context) => {
   /**
    * Task: static
    *
@@ -10,7 +10,7 @@ var taskSeries = (gc, context) => {
    */
   let options = context.options
 
-  gc.task('default', gc.fn(
+  gc.task('static', gc.fn(
     gc.pump([
       gc.src(path.join(options.dirs.source, options.dirs.static)),
       gc.dest(path.join(options.dirs.build)),
@@ -18,5 +18,3 @@ var taskSeries = (gc, context) => {
     ])
   ))
 }
-
-module.exports = taskSeries
