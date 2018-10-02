@@ -2,7 +2,7 @@
 
 const gulpData    = require('gulp-data');
 const gulpHtmlmin = require('gulp-htmlmin');
-const gulpPug     = require('gulp-pug');
+const gulpPug     = require('@ideolumo/gulp-pug');
 const gulpRename  = require('gulp-rename');
 const path        = require('path');
 const process     = require('process');
