@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-const del          = require('del');
-const gulp         = require('gulp');
-const gulpImagemin = require('gulp-imagemin');
-const gulpRename   = require('gulp-rename');
+const del = require('del')
+const gulp = require('gulp')
+const gulpImagemin = require('gulp-imagemin')
+const gulpRename = require('gulp-rename')
 
 /**
  * Task: compress-images
@@ -15,11 +15,11 @@ const gulpRename   = require('gulp-rename');
 gulp.task('compress-images', () => gulp
   .src(['./src/**/*.+(jpg|jpeg|gif|png|svg)', '!./src/**/*.min.*'])
   .pipe(gulpRename((path) => {
-    path.extname = '.min' + path.extname;
+    path.extname = '.min' + path.extname
   }))
   .pipe(gulpImagemin())
   .pipe(gulp.dest('./src'))
-);
+)
 
 /**
  * Task: clean-compressed-images
@@ -28,4 +28,4 @@ gulp.task('compress-images', () => gulp
  */
 gulp.task('clean-compressed-images', () => del([
   './src/**/*.min.+(jpg|jpeg|gif|png|svg)'
-]));
+]))

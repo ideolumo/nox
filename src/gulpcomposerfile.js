@@ -1,13 +1,10 @@
-const gulp           = require('gulp')
-const gulpComposer   = require('gulp-composer')
-const process        = require('process')
+const gulp = require('gulp')
+const GulpComposer = require('gulp-composer')
 
-
-
-var gc = new gulpComposer(gulp)
+var gc = new GulpComposer(gulp)
 const context = require('./build-context')()
 
 require('./tasks/static')(gc, context)
+require('./tasks/default')(gc, context)
 
-
-module.exports = gc.compose()
+module.exports = gc

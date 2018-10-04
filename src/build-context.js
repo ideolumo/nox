@@ -1,5 +1,5 @@
 const defaultOptions = require('./default-options')
-const browserSync    = require('browser-sync').create()
+const browserSync = require('browser-sync').create()
 
 module.exports = () => {
   const context = {

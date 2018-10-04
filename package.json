@@ -2,29 +2,25 @@
   "name": "@ideolumo/nox",
   "version": "0.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "src/gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp",
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "lint": "eslint ./gulpfile.js ./tasks/**/*",
-    "lint-fix": "eslint --fix ./gulpfile.js ./tasks/**/*"
+    "test": "standard && npm run dependency-check && node test/index.js",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
+    "dependency-check": "dependency-check --unused --missing -i standard -i dependency-check ./package.json ./test/index.js"
   },
   "author": "",
   "license": "ISC",
-  "bin": {
-    "nox": "bin/nox"
-  },
   "dependencies": {
     "browser-sync": "^2.24.7",
     "gulp": "^4.0.0",
     "gulp-composer": "git+https://github.com/IdeoLumo/gulp-composer.git"
   },
   "devDependencies": {
+    "dependency-check": "^3.2.1",
     "fs-extra": "^7.0.0",
     "globby": "^8.0.1",
-    "node-glob": "^1.2.0",
+    "standard": "^12.0.1",
     "tape": "^4.9.1",
     "tempy": "^0.2.1"
   }

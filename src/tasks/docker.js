@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const childProcess = require('child_process');
-const gulp         = require('gulp');
-const path         = require('path');
+const childProcess = require('child_process')
+const gulp = require('gulp')
+const path = require('path')
 
 module.exports = (context) => {
   let pathToDocker = path.resolve(context.initCwd, 'docker/docker-compose.yml')
@@ -17,34 +17,34 @@ module.exports = (context) => {
    */
   gulp.task('docker', () => {
     let docker = childProcess
-      .spawn('docker-compose', ['-f', pathToDocker, 'up']);
+      .spawn('docker-compose', ['-f', pathToDocker, 'up'])
 
-    docker.stdout.on('data', (data) => console.log(data.toString()));
+    docker.stdout.on('data', (data) => console.log(data.toString()))
 
-    docker.stderr.on('data', (data) => console.error(data.toString()));
+    docker.stderr.on('data', (data) => console.error(data.toString()))
 
     docker.on('close', (code) => {
-      console.log(`Docker-compose exited with code ${code}`);
-    });
+      console.log(`Docker-compose exited with code ${code}`)
+    })
 
     process.on('exit', () => {
-      console.log('Shutting down docker-compose...');
+      console.log('Shutting down docker-compose...')
 
       let dockerShutdown = childProcess
-        .spawn('docker-compose', ['-f', pathToDocker, 'down']);
+        .spawn('docker-compose', ['-f', pathToDocker, 'down'])
 
       dockerShutdown.stdout.on('data', (data) => {
-        console.log(data.toString());
-      });
+        console.log(data.toString())
+      })
 
       dockerShutdown.stderr.on('data', (data) => {
-        console.error(data.toString());
-      });
+        console.error(data.toString())
+      })
 
       dockerShutdown.on('close', (code) => {
         console.log(
-          `Docker-compose successfully shutted down with code ${code}`);
-      });
-    });
-  });
-};
+          `Docker-compose successfully shutted down with code ${code}`)
+      })
+    })
+  })
+}

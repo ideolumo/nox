@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const del  = require('del');
-const gulp = require('gulp');
+const del = require('del')
+const gulp = require('gulp')
 
 /**
  * Task: clean
@@ -9,6 +9,5 @@ const gulp = require('gulp');
  * Clean build folder
  */
 module.exports = (context) => {
-  gulp.task('clean', () => del.sync([context.options.buildFolder + '/**/*']));
+  gulp.task('clean', () => del.sync([context.options.buildFolder + '/**/*']))
 }
-

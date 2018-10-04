@@ -1,8 +1,6 @@
-'use strict';
+'use strict'
 
-const childProcess = require('child_process');
-const gulp         = require('gulp');
-const path         = require('path');
+const gulp = require('gulp')
 
 module.exports = (context) => {
   require('./docker')(context)
@@ -12,6 +10,5 @@ module.exports = (context) => {
    *
    * Starts docker & browser-sync
    */
-  gulp.task('http-server', ['docker', 'browser-sync']);
-};
-
+  gulp.task('http-server', ['docker', 'browser-sync'])
+}

@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const gulp                  = require('gulp');
-const gulpComposedPipesSass = require('../gulp-composed-pipes/sass');
-const pump                  = require('pump');
+const gulp = require('gulp')
+const gulpComposedPipesSass = require('../gulp-composed-pipes/sass')
+const pump = require('pump')
 
 module.exports = (context) => {
   /**
@@ -12,7 +12,7 @@ module.exports = (context) => {
    * build/assets/template/css. Minifies css.
    * Ignores files starting with _.
    */
-  gulp.task('template-sass', (cb) => { 
+  gulp.task('template-sass', (cb) => {
     pump([
       gulp.src([
         'src/template/**/*.sass',
@@ -22,8 +22,8 @@ module.exports = (context) => {
       ...gulpComposedPipesSass(context),
       gulp.dest('./build/assets/template/css'),
       context.browserSync.stream()
-    ], cb);
-  });
+    ], cb)
+  })
 
   /**
    * Task: template-assets
@@ -39,7 +39,7 @@ module.exports = (context) => {
       '!src/template/**/*.sass'])
     .pipe(gulp.dest('./build/assets/template'))
     .pipe(context.browserSync.stream())
-  );
+  )
 
-  gulp.task('template', ['template-sass', 'template-assets']);
-};
+  gulp.task('template', ['template-sass', 'template-assets'])
+}

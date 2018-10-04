@@ -1,8 +1,6 @@
-'use strict';
+'use strict'
 
-const childProcess = require('child_process');
-const gulp         = require('gulp');
-const path         = require('path');
+const gulp = require('gulp')
 
 module.exports = (context) => {
   /**
@@ -18,7 +16,6 @@ module.exports = (context) => {
       ui: {
         port: 8082
       }
-    });
-  });
-};
-
+    })
+  })
+}

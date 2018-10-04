@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
 let options = {}
 
 options.dirs = {
-  source: '/tmp/src',
-  build: '/tmp/build',
-  static: 'static',
+  source: 'source',
+  build: 'build',
+  static: '_static'
 }
 
 options.sass = {
@@ -16,10 +16,10 @@ options.sass = {
 options.pug = {
   basedir: options.sourceFolder,
   filters: {
-    //sass: gulpComposedPipesPug.sassFilterPug(options.sass)
+    // sass: gulpComposedPipesPug.sassFilterPug(options.sass)
   },
   locals: {
-    //require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
+    // require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
   }
 }
 
