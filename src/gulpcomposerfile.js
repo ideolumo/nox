@@ -13,6 +13,7 @@ function loadTask (task) {
 loadTask('build')
 loadTask('clean')
 loadTask('default')
+loadTask('scripts')
 loadTask('static')
 loadTask('styles')
 loadTask('pages')

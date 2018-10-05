@@ -28,7 +28,6 @@ exports.init = (gc, context) => {
 }
 
 exports.sassToCSS = (gc, context) => {
-  console.log(gulpSass)
   return gulpSass(context.options.sass).on('error', gulpSass.logError)
 }
 
