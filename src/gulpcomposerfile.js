@@ -10,9 +10,12 @@ function loadTask (task) {
   require('./' + path.join('tasks', task)).init(gc, context)
 }
 
-loadTask('static')
-loadTask('pages')
-loadTask('default')
+loadTask('build')
 loadTask('clean')
+loadTask('default')
+loadTask('static')
+loadTask('styles')
+loadTask('pages')
+loadTask('themes')
 
 module.exports = gc

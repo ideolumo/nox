@@ -7,7 +7,7 @@
     "test": "npm run lint && npm run dependency-check && node test/index.js",
     "lint": "standard \"src/**/*.js test/**/*.js\"",
     "lint-fix": "standard --fix \"src/**/*.js test/**/*.js\"",
-    "dependency-check": "dependency-check --unused --missing -i standard -i dependency-check -i gulp ./package.json ./src/tasks/default.js ./src/tasks/clean.js ./src/tasks/pages.js ./src/tasks/static.js ./src/tasks/themes.js ./test/index.js"
+    "dependency-check": "dependency-check --unused --missing -i standard -i dependency-check -i gulp ./package.json ./src/tasks/default.js ./src/tasks/clean.js ./src/tasks/pages.js ./src/tasks/static.js ./src/tasks/styles.js ./src/tasks/themes.js ./test/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,10 +16,12 @@
     "browser-sync": "^2.24.7",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
+    "gulp-clean-css": "^3.10.0",
     "gulp-composer": "git+https://github.com/IdeoLumo/gulp-composer.git",
     "gulp-data": "^1.3.1",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-rename": "^1.4.0"
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.1"
   },
   "devDependencies": {
     "dependency-check": "^3.2.1",

@@ -7,7 +7,13 @@ options.dirs = {
   build: 'build',
   static: '_static',
   pages: '_pages',
-  themes: '_themes'
+  themes: '_themes',
+  styles: '_styles',
+  scripts: '_scripts',
+  assets: 'assets',
+  assetsThemes: 'themes',
+  assetsStyles: 'styles',
+  assetsScripts: 'scripts'
 }
 
 options.sass = {

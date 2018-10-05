@@ -11,11 +11,11 @@ exports.init = (gc, context) => {
   let pathSourcePages = path.join(options.dirs.source, options.dirs.pages)
 
   gc.task('pages', gc.parallel(
-    'pages-pug',
-    'pages-assets'
+    'pages:pug',
+    'pages:assets'
   ))
 
-  gc.task('pages-pug', gc.fn(
+  gc.task('pages:pug', gc.fn(
     gc.pump([
       gc.src([
         path.join(pathSourcePages, '**/*.pug'),
@@ -30,7 +30,7 @@ exports.init = (gc, context) => {
     ])
   ))
 
-  gc.task('pages-assets', gc.fn(
+  gc.task('pages:assets', gc.fn(
     gc.pump([
       gc.src([
         path.join(pathSourcePages, '**/*.*'),
