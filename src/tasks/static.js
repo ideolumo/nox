@@ -2,7 +2,7 @@
 
 const path = require('path')
 
-module.exports = (gc, context) => {
+exports.init = (gc, context) => {
   /**
    * Task: static
    *

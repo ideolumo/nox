@@ -1,10 +1,17 @@
-const gulp = require('gulp')
-const GulpComposer = require('gulp-composer')
+'use strict'
 
-var gc = new GulpComposer(gulp)
+const GulpComposer = require('gulp-composer')
+const path = require('path')
+
+var gc = new GulpComposer()
 const context = require('./build-context')()
 
-require('./tasks/static')(gc, context)
-require('./tasks/default')(gc, context)
+function loadTask (task) {
+  require('./' + path.join('tasks', task)).init(gc, context)
+}
+
+loadTask('static')
+loadTask('pages')
+loadTask('default')
 
 module.exports = gc

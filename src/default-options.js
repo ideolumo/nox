@@ -5,7 +5,8 @@ let options = {}
 options.dirs = {
   source: 'source',
   build: 'build',
-  static: '_static'
+  static: '_static',
+  pages: '_pages'
 }
 
 options.sass = {
@@ -20,7 +21,14 @@ options.pug = {
   },
   locals: {
     // require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
-  }
+  },
+  extension: '.html'
+}
+
+options.minifyHTML = {
+  collapseWhitespace: true,
+  removeComments: true,
+  removeCommentsFromCDATA: true
 }
 
 module.exports = options
