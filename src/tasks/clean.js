@@ -1,13 +1,15 @@
 'use strict'
 
 const del = require('del')
-const gulp = require('gulp')
+const path = require('path')
 
-/**
- * Task: clean
- *
- * Clean build folder
- */
-module.exports = (context) => {
-  gulp.task('clean', () => del.sync([context.options.buildFolder + '/**/*']))
+exports.init = (gc, context) => {
+  gc.task('clean', gc.parallel('clean-build'))
+
+  gc.task('clean-build', gc.fn(
+    del([
+      path.join(context.options.dirs.build, '/**/*'),
+      path.join(context.options.dirs.build, '/**/.*')
+    ])
+  ))
 }

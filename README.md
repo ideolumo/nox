@@ -2,7 +2,7 @@
 
 nox is yet another static site generator which tries to do things differently yet being opiniotated on the folder structure, concepts and default used technoligies. \
 Features are:
-- Tamed pug/sass integration
+- Tamed pug/sass integration with aligned imports and default helper methods
 - Completely hackable & extendable (thanks to gulp)
 - Providing sane defaults
 - Docker support out of the box
@@ -14,7 +14,8 @@ Features are:
 ## Installation
 
 1. You need to have node/npm installed
-2. Create a new folder and `cd` into it
+2. Create a new project/folder and `cd` into it
+3. Init project with `npm init` and follow instructions
 2. Save nox to your project with `npm install @ideolumo/nox --save`
 
 ## Set up project
@@ -56,9 +57,10 @@ As soon as you got your head wrapped around this:
 1. Clone this repo
 3. Install dependencies by running `npm install`
 2. Get familiar with folder/project structure (especially how tasks and task related functions are defined)
-3. Run tests/linter... with `$ npm test`. Check out scripts in `package.json` for other helpful shortcuts.
+3. Run tests/linter... with `npm test`. Check out scripts in `package.json` for other helpful shortcuts.
 4. Run only tests by executing `ǹode test/index.js`.
 5. Implement whatever you want, if you think it's interesting, feel free to create a pull request
+6. If you have any questions/problems with setting things up or whatever, feel free to open an issue
 
 # License
 

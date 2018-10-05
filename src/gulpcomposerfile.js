@@ -13,5 +13,6 @@ function loadTask (task) {
 loadTask('static')
 loadTask('pages')
 loadTask('default')
+loadTask('clean')
 
 module.exports = gc

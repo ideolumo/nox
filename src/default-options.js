@@ -6,7 +6,8 @@ options.dirs = {
   source: 'source',
   build: 'build',
   static: '_static',
-  pages: '_pages'
+  pages: '_pages',
+  themes: '_themes'
 }
 
 options.sass = {
