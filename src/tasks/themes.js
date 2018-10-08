@@ -9,23 +9,19 @@ exports.init = (gc, context) => {
    * Copy static assets
    */
   let options = context.options
-  let pathSourceThemes = path.join(options.dirs.source, options.dirs.themes)
-  let pathBuildAssetsThemes = path.join(options.dirs.build, options.dirs.assets, options.dirs.assetsThemes)
-  console.log(pathSourceThemes, '->', pathBuildAssetsThemes)
+  console.log(options.paths.themes[0], '->', options.paths.themes[1])
 
   gc.task('themes', gc.parallel('themes:assets'))
 
-  gc.task('themes:assets', gc.fn(
-    gc.pump([
-      gc.src([
-        path.join(pathSourceThemes, '**/*'),
-        path.join(pathSourceThemes, '**/.*'),
-        '!' + path.join(pathSourceThemes, '**/_*'),
-        '!' + path.join(pathSourceThemes, '**/*.sass'),
-        '!' + path.join(pathSourceThemes, '**/*.pug'),
-      ]),
-      gc.dest(pathBuildAssetsThemes),
-      context.SyncBrowser()
-    ])
-  ))
+  gc.task('themes:assets', gc.fn(gc.pump([
+    gc.src([
+      path.join(options.paths.themes[0], '**/*'),
+      path.join(options.paths.themes[0], '**/.*'),
+      '!' + path.join(options.paths.themes[0], '**/_*'),
+      '!' + path.join(options.paths.themes[0], '**/*.sass'),
+      '!' + path.join(options.paths.themes[0], '**/*.pug'),
+    ]),
+    gc.dest(options.paths.themes[1]),
+    context.SyncBrowser()
+  ])))
 }

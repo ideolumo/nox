@@ -4,6 +4,15 @@
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
+    "@ideolumo/gulp-composer": {
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/@ideolumo/gulp-composer/-/gulp-composer-1.2.2.tgz",
+      "integrity": "sha512-jS+bbfkgM8PZtrxN1GnUSNKza5bzXguSPCuyBtee1T4oIRe9D9VwftXzJI+HcFu9cS81w4mluYDTRkBPttmroQ==",
+      "requires": {
+        "pump": "^3.0.0",
+        "undertaker-forward-reference": "^1.0.2"
+      }
+    },
     "@ideolumo/gulp-pug": {
       "version": "4.0.3",
       "resolved": "https://registry.npmjs.org/@ideolumo/gulp-pug/-/gulp-pug-4.0.3.tgz",
@@ -4192,14 +4201,6 @@
             "homedir-polyfill": "^1.0.1"
           }
         }
-      }
-    },
-    "gulp-composer": {
-      "version": "git+https://github.com/IdeoLumo/gulp-composer.git#cf6420fa161508849f0d75ea4c538cf90063057c",
-      "from": "git+https://github.com/IdeoLumo/gulp-composer.git",
-      "requires": {
-        "pump": "^3.0.0",
-        "undertaker-forward-reference": "^1.0.2"
       }
     },
     "gulp-data": {

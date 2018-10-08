@@ -1,6 +1,6 @@
 'use strict'
 
-const GulpComposer = require('gulp-composer')
+const GulpComposer = require('@ideolumo/gulp-composer')
 const path = require('path')
 
 var gc = new GulpComposer()

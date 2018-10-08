@@ -6,25 +6,21 @@ const gulpSass = require('gulp-sass')
 
 exports.init = (gc, context) => {
   let options = context.options
-  let pathSourceOrigin = path.join(options.dirs.source, options.dirs.styles)
-  let pathBuildDestination = path.join(options.dirs.build, options.dirs.assets, options.dirs.assetsStyles)
 
   gc.task('styles', gc.parallel(
     'styles:sass',
   ))
 
-  gc.task('styles:sass', gc.fn(
-    gc.pump([
-      gc.src([
-        path.join(pathSourceOrigin, '**/*.sass'),
-        '!' + path.join(pathBuildDestination, '**/_*.sass')
-      ]),
-      exports.sassToCSS(gc, context),
-      exports.minfiyCSS(gc, context),
-      gc.dest(pathBuildDestination),
-      context.SyncBrowser()
-    ])
-  ))
+  gc.task('styles:sass', gc.fn(gc.pump([
+    gc.src([
+      path.join(options.paths.styles[0], '**/*.sass'),
+      '!' + path.join(options.paths.styles[0], '**/_*.sass')
+    ]),
+    exports.sassToCSS(gc, context),
+    exports.minfiyCSS(gc, context),
+    gc.dest(options.paths.styles[1]),
+    context.SyncBrowser()
+  ])))
 }
 
 exports.sassToCSS = (gc, context) => {

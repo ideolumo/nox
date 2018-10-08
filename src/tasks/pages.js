@@ -9,40 +9,35 @@ const sass = require('node-sass')
 
 exports.init = (gc, context) => {
   let options = context.options
-  let pathSourcePages = path.join(options.dirs.source, options.dirs.pages)
 
   gc.task('pages', gc.parallel(
     'pages:pug',
     'pages:assets'
   ))
 
-  gc.task('pages:pug', gc.fn(
-    gc.pump([
-      gc.src([
-        path.join(pathSourcePages, '**/*.pug'),
-        '!' + path.join(pathSourcePages, '**/_*.pug')
-      ]),
-      exports.injectPugData(gc, context),
-      exports.pugToHTML(gc, context),
-      exports.minifyHTML(gc, context),
-      exports.changeFileextension(gc, context),
-      gc.dest(path.join(options.dirs.build)),
-      context.SyncBrowser()
-    ])
-  ))
+  gc.task('pages:pug', gc.fn(gc.pump([
+    gc.src([
+      path.join(options.paths.pages[0], '**/*.pug'),
+      '!' + path.join(options.paths.pages[0], '**/_*.pug')
+    ]),
+    exports.injectPugData(gc, context),
+    exports.pugToHTML(gc, context),
+    exports.minifyHTML(gc, context),
+    exports.changeFileextension(gc, context),
+    gc.dest(options.paths.pages[1]),
+    context.SyncBrowser()
+  ])))
 
-  gc.task('pages:assets', gc.fn(
-    gc.pump([
-      gc.src([
-        path.join(pathSourcePages, '**/*.*'),
-        '!' + path.join(pathSourcePages, '**/_*'),
-        '!' + path.join(pathSourcePages, '**/*.pug'),
-        '!' + path.join(pathSourcePages, '**/*.sass')
-      ]),
-      gc.dest(path.join(options.dirs.build)),
-      context.SyncBrowser()
-    ])
-  ))
+  gc.task('pages:assets', gc.fn(gc.pump([
+    gc.src([
+      path.join(options.paths.pages[0], '**/*.*'),
+      '!' + path.join(options.paths.pages[0], '**/_*'),
+      '!' + path.join(options.paths.pages[0], '**/*.pug'),
+      '!' + path.join(options.paths.pages[0], '**/*.sass')
+    ]),
+    gc.dest(options.paths.pages[1]),
+    context.SyncBrowser()
+  ])))
 }
 
 // Inject local variables to use in pug templates

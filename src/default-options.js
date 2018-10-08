@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 let options = {}
 
 options.dirs = {
@@ -14,6 +16,29 @@ options.dirs = {
   assetsThemes: 'themes',
   assetsStyles: 'styles',
   assetsScripts: 'scripts'
+}
+
+options.paths = {
+  pages: [
+    path.join(options.dirs.source, options.dirs.pages),
+    path.join(options.dirs.build)
+  ],
+  static: [
+    path.join(options.dirs.source, options.dirs.static),
+    path.join(options.dirs.build)
+  ],
+  scripts: [
+    path.join(options.dirs.source, options.dirs.scripts),
+    path.join(options.dirs.build, options.dirs.assets, options.dirs.assetsScripts)
+  ],
+  styles: [
+    path.join(options.dirs.source, options.dirs.styles),
+    path.join(options.dirs.build, options.dirs.assets, options.dirs.assetsStyles)
+  ],
+  themes: [
+    path.join(options.dirs.source, options.dirs.themes),
+    path.join(options.dirs.build, options.dirs.assets, options.dirs.assetsThemes)
+  ]
 }
 
 options.sass = {

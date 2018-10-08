@@ -9,12 +9,9 @@ exports.init = (gc, context) => {
    * Copy static assets
    */
   let options = context.options
-  let pathSourceStatic = path.join(options.dirs.source, options.dirs.static)
-  gc.task('static', gc.fn(
-    gc.pump([
-      gc.src([path.join(pathSourceStatic, '**/*'), path.join(pathSourceStatic, '**/.*')]),
-      gc.dest(path.join(options.dirs.build)),
-      context.SyncBrowser()
-    ])
-  ))
+  gc.task('static', gc.fn(gc.pump([
+    gc.src([path.join(options.paths.static[0], '**/*'), path.join(options.paths.static[0], '**/.*')]),
+    gc.dest(options.paths.static[1]),
+    context.SyncBrowser()
+  ])))
 }
