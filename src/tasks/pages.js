@@ -5,6 +5,7 @@ const gulpData = require('gulp-data')
 const gulpHtmlmin = require('gulp-htmlmin')
 const gulpPug = require('@ideolumo/gulp-pug')
 const gulpRename = require('gulp-rename')
+const sass = require('node-sass')
 
 exports.init = (gc, context) => {
   let options = context.options
@@ -75,4 +76,34 @@ exports.changeFileextension = (gc, context) => {
   return gulpRename(path => {
     path.extname = context.options.pug.extension
   })
+}
+
+exports.remappedRootRequire = remapRootToPath => {
+  return (p) => {
+    if(p.startsWith('/')) p = path.join(process.cwd(), remapRootToPath, p);
+    // For hot reloading we don't want to cache
+    delete require.cache[require.resolve(p)]
+    return require(p);
+  }
+}
+
+exports.sassFilterPug = optionsSass => {
+  return (text, options) => {
+    let pathToFile = path.dirname(options.filename);
+    let sassOpt = {
+      file: options.filename,
+      data: text,
+      indentedSyntax: true,
+      includePaths: [pathToFile, optionsSass.includePaths],
+      ...optionsSass
+    };
+    let result;
+    try {
+      result = sass.renderSync(sassOpt)
+    } catch(err) {
+      console.log(err)
+      throw new Error(`Error: ${err.message} on line ${err.line} on position ${err.column} in file ${options.filename}`);
+    }
+    return result.css.toString();
+  }
 }

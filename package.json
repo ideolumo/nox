@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ideolumo/gulp-pug": "^4.0.2",
-    "browser-sync": "^2.24.7",
+    "@ideolumo/gulp-pug": "^4.0.3",
+    "browser-sync": "^2.26.0",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^3.10.0",
@@ -23,6 +23,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.1",
+    "node-sass": "^4.9.3",
     "uglify-es": "^3.3.9"
   },
   "devDependencies": {

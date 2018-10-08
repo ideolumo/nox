@@ -1,1 +1,1 @@
-module.exports = require('./gulpcomposerfile').compose()
+var gulp = module.exports = require('./gulpcomposerfile').compose()

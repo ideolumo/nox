@@ -22,12 +22,12 @@ options.sass = {
 }
 
 options.pug = {
-  basedir: options.sourceFolder,
+  basedir: options.dirs.source,
   filters: {
-    // sass: gulpComposedPipesPug.sassFilterPug(options.sass)
+    sass: require('./tasks/pages').sassFilterPug(options.sass)
   },
   locals: {
-    // require: gulpComposedPipesPug.remappedRootRequire(options.sourceFolder)
+    require: require('./tasks/pages').remappedRootRequire(options.dirs.source)
   },
   extension: '.html'
 }
