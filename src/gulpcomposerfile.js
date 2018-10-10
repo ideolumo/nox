@@ -18,5 +18,8 @@ loadTask('static')
 loadTask('styles')
 loadTask('pages')
 loadTask('themes')
+loadTask('other-folders')
+loadTask('watch')
+
 
 module.exports = gc

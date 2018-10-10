@@ -1,13 +1,17 @@
-const sass = require('node-sass')
-let result;
-try {
-  result = sass.renderSync({
-    data: '.s{ background-color: $test}'
-  })
-} catch(err) {
-  console.log(err)
-}
+'use strict';
 
-console.log(result)
+var del = require('del');
+var path = require('path');
+var gulpComposer = require('@ideolumo/gulp-composer')
 
+let gc = new gulpComposer()
 
+gc.task('watch', function (cb) {
+  var watcher = gc.gulp.watch('source/**/*.js', () => {
+    console.log('hallo')
+
+  });
+  cb()
+})
+
+let gulp = gc.compose()

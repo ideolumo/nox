@@ -7,12 +7,12 @@
     "test": "npm run lint && npm run dependency-check && node test/index.js",
     "lint": "standard \"src/**/*.js test/**/*.js\"",
     "lint-fix": "standard --fix \"src/**/*.js test/**/*.js\"",
-    "dependency-check": "dependency-check --unused --missing -i standard -i dependency-check -i gulp ./package.json ./src/tasks/build.js ./src/tasks/default.js ./src/tasks/clean.js ./src/tasks/pages.js ./src/tasks/scripts.js ./src/tasks/static.js ./src/tasks/styles.js ./src/tasks/themes.js ./test/index.js"
+    "dependency-check": "dependency-check --unused --missing -i standard -i dependency-check -i gulp ./package.json ./src/tasks/build.js ./src/tasks/clean.js ./src/tasks/default.js ./src/tasks/pages.js ./src/tasks/scripts.js ./src/tasks/static.js ./src/tasks/styles.js ./src/tasks/themes.js ./src/tasks/watch.js ./test/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ideolumo/gulp-composer": "^1.2.2",
+    "@ideolumo/gulp-composer": "^1.3.0",
     "@ideolumo/gulp-pug": "^4.0.3",
     "browser-sync": "^2.26.0",
     "del": "^3.0.0",
@@ -23,6 +23,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.1",
+    "gulp-watch": "^5.0.1",
     "node-sass": "^4.9.3",
     "uglify-es": "^3.3.9"
   },

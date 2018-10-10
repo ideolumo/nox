@@ -1,1 +1,2 @@
-var gulp = module.exports = require('./gulpcomposerfile').compose()
+var gc = require('./gulpcomposerfile')
+let gulp = gc.compose()
