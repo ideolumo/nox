@@ -3,23 +3,28 @@
 const GulpComposer = require('@ideolumo/gulp-composer')
 const path = require('path')
 
-var gc = new GulpComposer()
-const context = require('./build-context')()
 
-function loadTask (task) {
-  require('./' + path.join('tasks', task)).init(gc, context)
+exports.default = context => {
+  let gc = new GulpComposer()
+
+  exports.loadTasks(gc, context, [
+    'build',
+    'clean',
+    'default',
+    'other-folders',
+    'pages',
+    'scripts',
+    'static',
+    'styles',
+    'themes',
+    'watch'
+  ])
+
+  return gc
 }
 
-loadTask('build')
-loadTask('clean')
-loadTask('default')
-loadTask('scripts')
-loadTask('static')
-loadTask('styles')
-loadTask('pages')
-loadTask('themes')
-loadTask('other-folders')
-loadTask('watch')
-
-
-module.exports = gc
+exports.loadTasks = (gc, context, tasks) => {
+  for (let task of tasks) {
+    require('./' + path.join('tasks', task)).init(gc, context)
+  }
+}
