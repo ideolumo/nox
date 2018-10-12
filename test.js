@@ -1,17 +1,25 @@
 'use strict';
 
-var del = require('del');
-var path = require('path');
-var gulpComposer = require('@ideolumo/gulp-composer')
+const _exec = require('child_process').exec
 
-let gc = new gulpComposer()
+var exec = (cmd, options) => {
+  let resolve, reject
+  let promise = new Promise((res, rej) => {[resolve, reject] = [res, rej]})
 
-gc.task('watch', function (cb) {
-  var watcher = gc.gulp.watch('source/**/*.js', () => {
-    console.log('hallo')
+  if(!resolve || !reject) throw new Error(`Couldn't get resolve/reject from Promise`)
 
-  });
-  cb()
-})
+  promise.child_process = _exec(cmd, options, (err, stdout, stderr) => {
+    if(err) return reject(err, stdout, stderr)
+    resolve(stdout, stderr)
+  })
 
-let gulp = gc.compose()
+  return promise
+}
+
+async function main() {
+  let a = exec('gulp -f ./src/gulpfile.js watch')
+  console.log(a)
+  a.child_process.kill()
+}
+
+main()
