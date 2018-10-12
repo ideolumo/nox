@@ -27,7 +27,7 @@ exports.init = (gc, context) => {
     exports.minifyHTML(gc, context),
     exports.changeFileextension(gc, context),
     gc.dest(options.paths.pages[1]),
-    context.SyncBrowser()
+    //context.SyncBrowser()
   ])))
 
   gcWatchTask(gc, 'watch:pages:pug', globsPages, ['pages:pug'])
