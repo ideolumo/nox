@@ -3,13 +3,13 @@
 const del = require('del')
 const path = require('path')
 
-exports.init = (gc, context) => {
-  gc.task('clean', gc.parallel('clean:build'))
+exports.init = (gulp, context) => {
+  gulp.task('clean', gulp.parallel('clean:build'))
 
-  gc.task('clean:build', gc.fn(() => {
+  gulp.task('clean:build', () => {
     return del([
       path.join(context.options.dirs.build, '/**/*'),
       path.join(context.options.dirs.build, '/**/.*')
     ])
-  }))
+  })
 }

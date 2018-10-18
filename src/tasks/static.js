@@ -1,9 +1,10 @@
 'use strict'
 
 const path = require('path')
-const {gcWatchTask} = require('../helpers')
+const {gulpWatchTask} = require('../helpers')
+const pump = require('pump')
 
-exports.init = (gc, context) => {
+exports.init = (gulp, context) => {
   let options = context.options
 
   let globs = [
@@ -11,11 +12,13 @@ exports.init = (gc, context) => {
     path.join(options.paths.static[0], '**/.*')
   ]
 
-  gc.task('static', gc.fn(gc.pump([
-    gc.src(globs),
-    gc.dest(options.paths.static[1]),
-    context.SyncBrowser()
-  ])))
+  gulp.task('static', (cb) => {
+    return pump(
+      gulp.src(globs),
+      gulp.dest(options.paths.static[1]),
+      context.SyncBrowser(),
+      cb)
+  })
 
-  gcWatchTask(gc, 'watch:static', globs, ['static'])
+  gulpWatchTask(gulp, 'watch:static', globs, ['static'])
 }

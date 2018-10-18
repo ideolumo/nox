@@ -1,8 +1,19 @@
 'use strict'
 
-exports.gcWatchTask = (gc, name, paths, fns) => {
-  gc.task(name, cb => gc.gulp.watch(
+const pump = require('pump')
+
+exports.gulpPumpTask = (gulp, taskName, ...fns) => {
+  gulp.task(taskName, (cb) => {
+    return pump(
+      ...fns,
+      cb
+    )
+  })
+}
+
+exports.gulpWatchTask = (gulp, name, paths, fns) => {
+  gulp.task(name, cb => gulp.watch(
       paths,
-      gc.gulp.parallel(cb => {console.log('[WATCH]', name, ...fns);cb()}, ...fns))
+      gulp.parallel(cb => {console.log('[WATCH]', name, ...fns);cb()}, ...fns))
   )
 }

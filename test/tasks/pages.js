@@ -42,28 +42,24 @@ tape('the sass filter should be available', async t => {
 })
 
 
-tape.only('should watch for changes to existing pages and update pug', async t => {
+tape('should watch for changes to existing pages and update pug', async t => {
   let tmpNox = await tempyNox([
     'source/_pages/pagefoo/**/*'
   ])
 
   let runningGulp = runGulp(tmpNox, null, ['build', 'watch'])
-  runningGulp.events.on('all', event => {
-    if(event != 'stdout') console.log(event)
-  })
-  console.log('waiting for build...')
+
   await waitForEvent(runningGulp.events, 'finished-build')
-  console.log('finished build')
   await testFileContentEquals(t, [tmpNox, 'build/pagefoo/index.html'], '<p>FooBar</p>', `Old content is correct`)
   await replaceFileContent(join(tmpNox, 'source/_pages/pagefoo/index.pug'), 'p NewContent')
-  await waitForEvent(runningGulp.events, 'finished-<anonymous>')
+  await waitForEvent(runningGulp.events, 'finished-pages:pug')
 
   await testFileContentEquals(t, [tmpNox, 'build/pagefoo/index.html'], '<p>NewContent</p>', 'Content got successfully updated')
   await runningGulp.kill()
   t.end()
 })
 
-tape('should watch for new created pages and rebuild', async t => {
+tape.skip('should watch for new created pages and rebuild', async t => {
   let tmpNox = await tempyNox([])
 
   let runningGulp = runGulp(tmpNox)

@@ -6,13 +6,15 @@ const gulpHtmlmin = require('gulp-htmlmin')
 const gulpPug = require('@ideolumo/gulp-pug')
 const gulpRename = require('gulp-rename')
 const sass = require('node-sass')
-const {gcWatchTask} = require('../helpers')
+const {gulpWatchTask} = require('../helpers')
+const gulpDebug = require('gulp-debug')
+const pump = require('pump')
 
-exports.init = (gc, context) => {
+exports.init = (gulp, context) => {
   let options = context.options
 
-  gc.task('pages', gc.parallel('pages:pug', 'pages:assets'))
-  gc.task('watch:pages', gc.parallel('watch:pages:pug', 'watch:pages:assets'))
+  gulp.task('pages', gulp.parallel('pages:pug', 'pages:assets'))
+  gulp.task('watch:pages', gulp.parallel('watch:pages:pug', 'watch:pages:assets'))
 
 
   let globsPages = [
@@ -20,17 +22,25 @@ exports.init = (gc, context) => {
     '!' + path.join(options.paths.pages[0], '**/_*.pug')
   ]
 
-  gc.task('pages:pug', gc.fn(gc.pump([
-    gc.src(globsPages),
-    exports.injectPugData(gc, context),
-    exports.pugToHTML(gc, context),
-    exports.minifyHTML(gc, context),
-    exports.changeFileextension(gc, context),
-    gc.dest(options.paths.pages[1]),
-    //context.SyncBrowser()
-  ])))
+  gulp.task('pages:pug', (cb) => {
+    return pump(
+      gulp.src(globsPages),
+      gulpDebug(),
+      exports.injectPugData(gulp, context),
+      exports.pugToHTML(gulp, context),
+      exports.minifyHTML(gulp, context),
+      exports.changeFileextension(gulp, context),
+      gulp.dest(options.paths.pages[1]),
+      //context.SyncBrowser()
+      cb
+    )
+  })
 
-  gcWatchTask(gc, 'watch:pages:pug', globsPages, ['pages:pug'])
+  gulp.task('watch:pages:pug', () => {
+    gulp.watch(globsPages, gulp.series('pages:pug'))
+  })
+
+  //gulpWatchTask(gulp, 'watch:pages:pug', globsPages, ['pages:pug'])
 
   let globsAssets = [
     path.join(options.paths.pages[0], '**/*.*'),
@@ -39,17 +49,19 @@ exports.init = (gc, context) => {
     '!' + path.join(options.paths.pages[0], '**/*.sass')
   ]
 
-  gc.task('pages:assets', gc.fn(gc.pump([
-    gc.src(globsAssets),
-    gc.dest(options.paths.pages[1]),
-    context.SyncBrowser()
-  ])))
+  gulp.task('pages:assets', (cb) => {
+    return pump([
+      gulp.src(globsAssets),
+      gulp.dest(options.paths.pages[1]),
+      context.SyncBrowser()
+    ], cb)
+  })
 
-  gcWatchTask(gc, 'watch:pages:assets', globsAssets, ['pages:assets'])
+  gulpWatchTask(gulp, 'watch:pages:assets', globsAssets, ['pages:assets'])
 }
 
 // Inject local variables to use in pug templates
-exports.injectPugData = (gc, context) => {
+exports.injectPugData = (gulp, context) => {
   let options = context.options
   return gulpData(file => {
     let pathToNoxProjectSrc = path.join(process.cwd(), options.dirs.source)
@@ -66,16 +78,16 @@ exports.injectPugData = (gc, context) => {
 }
 
 // Translate pug into HTML
-exports.pugToHTML = (gc, context) => {
+exports.pugToHTML = (gulp, context) => {
   return gulpPug(context.options.pug)
 }
 
 // Minify html
-exports.minifyHTML = (gc, context) => {
+exports.minifyHTML = (gulp, context) => {
   return gulpHtmlmin(context.options.minifyHTML)
 }
 
-exports.changeFileextension = (gc, context) => {
+exports.changeFileextension = (gulp, context) => {
   return gulpRename(path => {
     path.extname = context.options.pug.extension
   })

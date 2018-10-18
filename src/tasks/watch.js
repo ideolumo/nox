@@ -2,12 +2,12 @@
 
 const {join} = require('path')
 const gulpWatch = require('gulp-watch')
-const {gcWatchTask} = require('../helpers')
+const {gulpWatchTask} = require('../helpers')
 
-exports.init = (gc, context) => {
+exports.init = (gulp, context) => {
   let options = context.options
 
-  gc.task('watch', gc.parallel(
+  gulp.task('watch', gulp.parallel(
     'watch:pages',
     'watch:static',
     'watch:scripts',

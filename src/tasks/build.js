@@ -1,5 +1,5 @@
 'use strict'
 
-exports.init = (gc, context) => {
-  gc.task('build', gc.parallel('pages', 'themes', 'static', 'styles', 'scripts'))
+exports.init = (gulp, context) => {
+  gulp.task('build', gulp.parallel('pages', 'themes', 'static', 'styles', 'scripts'))
 }

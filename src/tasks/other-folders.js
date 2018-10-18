@@ -1,9 +1,9 @@
 'use strict'
 
 const {join} = require('path')
-const {gcWatchTask} = require('../helpers')
+const {gulpWatchTask} = require('../helpers')
 
-exports.init = (gc, context) => {
+exports.init = (gulp, context) => {
   let options = context.options
 
   let otherFolders = [
@@ -19,6 +19,6 @@ exports.init = (gc, context) => {
     '!' + join(options.dirs.source, `(${otherFolders.join('|')})`)
   ]
 
-  gcWatchTask(gc, 'watch:other-folders', globs, ['pages:pug', 'themes:sass'])
+  gulpWatchTask(gulp, 'watch:other-folders', globs, ['pages:pug', 'themes:sass'])
 
 }

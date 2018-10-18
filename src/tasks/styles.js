@@ -3,34 +3,38 @@
 const path = require('path')
 const gulpCleanCss = require('gulp-clean-css')
 const gulpSass = require('gulp-sass')
-const {gcWatchTask} = require('../helpers')
+const {gulpWatchTask} = require('../helpers')
+const pump = require('pump')
 
-exports.init = (gc, context) => {
+exports.init = (gulp, context) => {
   let options = context.options
 
-  gc.task('styles', gc.parallel('styles:sass'))
-  gc.task('watch:styles', gc.parallel('watch:styles:sass'))
+  gulp.task('styles', gulp.parallel('styles:sass'))
+  gulp.task('watch:styles', gulp.parallel('watch:styles:sass'))
 
   let globsSass = [
     path.join(options.paths.styles[0], '**/*.sass'),
     '!' + path.join(options.paths.styles[0], '**/_*.sass')
   ]
 
-  gc.task('styles:sass', gc.fn(gc.pump([
-    gc.src(globsSass),
-    exports.sassToCSS(gc, context),
-    exports.minfiyCSS(gc, context),
-    gc.dest(options.paths.styles[1]),
-    context.SyncBrowser()
-  ])))
+  gulp.task('styles:sass', (cb) => {
+    return pump(
+      gulp.src(globsSass),
+      exports.sassToCSS(gulp, context),
+      exports.minfiyCSS(gulp, context),
+      gulp.dest(options.paths.styles[1]),
+      context.SyncBrowser(),
+      cb
+    )
+  })
 
-  gcWatchTask(gc, 'watch:styles:sass', globsSass, ['styles:sass'])
+  gulpWatchTask(gulp, 'watch:styles:sass', globsSass, ['styles:sass'])
 }
 
-exports.sassToCSS = (gc, context) => {
+exports.sassToCSS = (gulp, context) => {
   return gulpSass(context.options.sass).on('error', gulpSass.logError)
 }
 
-exports.minfiyCSS = (gc, context) => {
+exports.minfiyCSS = (gulp, context) => {
   return gulpCleanCss({})
 }
