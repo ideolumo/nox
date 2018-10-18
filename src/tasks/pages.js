@@ -7,7 +7,6 @@ const gulpPug = require('@ideolumo/gulp-pug')
 const gulpRename = require('gulp-rename')
 const sass = require('node-sass')
 const {gulpWatchTask} = require('../helpers')
-const gulpDebug = require('gulp-debug')
 const pump = require('pump')
 
 exports.init = (gulp, context) => {
@@ -25,7 +24,7 @@ exports.init = (gulp, context) => {
   gulp.task('pages:pug', (cb) => {
     return pump(
       gulp.src(globsPages),
-      gulpDebug(),
+      //gulpDebug(),
       exports.injectPugData(gulp, context),
       exports.pugToHTML(gulp, context),
       exports.minifyHTML(gulp, context),
@@ -116,7 +115,6 @@ exports.sassFilterPug = optionsSass => {
     try {
       result = sass.renderSync(sassOpt)
     } catch(err) {
-      console.log(err)
       throw new Error(`Error: ${err.message} on line ${err.line} on position ${err.column} in file ${options.filename}`);
     }
     return result.css.toString();

@@ -42,7 +42,7 @@ options.paths = {
 }
 
 options.sass = {
-  includePaths: [options.sourceFolder],
+  includePaths: [options.dirs.source],
   outputStyle: 'compressed'
 }
 
@@ -54,7 +54,7 @@ options.pug = {
   locals: {
     require: require('./tasks/pages').remappedRootRequire(options.dirs.source)
   },
-  extension: '.html'
+  extension: '.php'
 }
 
 options.minifyHTML = {
