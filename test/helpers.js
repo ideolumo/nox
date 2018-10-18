@@ -58,7 +58,7 @@ exports.exec = (cmd, options) => {
 exports.REGEX_MATCH_GULP_START_FINISH = /(?:\[(\d\d:\d\d:\d\d)\] )?((?:Finished)|(?:Starting)) (?:'(.+?)')(?:\.\.\.)?(?: after (\d\d) ms)?/gm
 exports.runGulp = (cwd, gulpfile, tasks) => {
   if(!gulpfile) gulpfile = './src/gulpfile.js'
-  if(!tasks) tasks = []
+  if(!tasks) tasks = ['build']
   if(typeof tasks === 'string') tasks = [tasks]
   let cmd = `./node_modules/.bin/gulp -f ${gulpfile} --cwd ${cwd} ${tasks.join(' ')}`
 

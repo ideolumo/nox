@@ -4,7 +4,7 @@ const childProcess = require('child_process')
 const gulp = require('gulp')
 const path = require('path')
 
-module.exports = (context) => {
+exports.init = (gulp, context) => {
   let pathToDocker = path.resolve(context.initCwd, 'docker/docker-compose.yml')
 
   console.log('Loading docker-compose from:', pathToDocker)
@@ -16,8 +16,14 @@ module.exports = (context) => {
    * folder or falling back to the default nox docker-compose.yml file.
    */
   gulp.task('docker', () => {
-    let docker = childProcess
-      .spawn('docker-compose', ['-f', pathToDocker, 'up'])
+    console.log(process.cwd(), pathToDocker)
+    let docker = childProcess.spawn(
+      'docker-compose', ['-f', pathToDocker, 'up'],
+      {
+        cwd: process.cwd()
+      })
+
+
 
     docker.stdout.on('data', (data) => console.log(data.toString()))
 

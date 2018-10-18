@@ -26,5 +26,8 @@ exports.loadTasks(exports.gulp, exports.context, [
   'static',
   'styles',
   'themes',
-  'watch'
+  'watch',
+  'browsersync',
+  'docker',
+  'http-server'
 ])
