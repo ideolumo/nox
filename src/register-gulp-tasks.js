@@ -11,6 +11,7 @@ module.exports = (context) => {
   require('./gulp-tasks/javascript')(context);
   require('./gulp-tasks/static')(context);
   require('./gulp-tasks/http-server')(context);
+  require('./gulp-tasks/compress-images')(context);
 
 
   gulp.task('build', [
