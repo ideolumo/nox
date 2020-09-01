@@ -34,7 +34,8 @@
     "gulp-watch": "^5.0.1",
     "node-sass": "^4.9.3",
     "pump": "^3.0.0",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.9",
+    "natives": "^1.1.6"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
