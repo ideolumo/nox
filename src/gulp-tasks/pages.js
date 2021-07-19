@@ -67,5 +67,5 @@ Details:
     .pipe(context.browserSync.stream())
   );
 
-  gulp.task('pages', ['pages-pug', 'pages-assets']);
+  gulp.task('pages', gulp.series('pages-pug', 'pages-assets'));
 };

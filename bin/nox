@@ -89,39 +89,28 @@ function applyLogs(gulpInstance) {
     }
   });
 
-  // Total hack due to poor error management in orchestrator
-  gulpInstance.on('err', function() {
-    failed = true;
-  });
-
-  gulpInstance.on('task_start', function(e) {
+  gulpInstance.on('start', function(e) {
     // TODO: batch these
     // so when 5 tasks start at once it only logs one time with all 5
-    console.log('Starting', '\'' + e.task + '\'...');
+    console.log('Starting', '\'' + e.name + '\'...');
   });
 
-  gulpInstance.on('task_stop', function(e) {
-    var time = e.hrDuration;
+  gulpInstance.on('stop', function(e) {
     console.log(
-      'Finished', '\'' + e.task + '\'',
-      'after', time);
+      'Finished', '\'' + e.name + '\'',
+      'after', e.time);
   });
 
-  gulpInstance.on('task_err', function(e) {
-    var time = e.hrDuration;
+  gulpInstance.on('err', function(e) {
+    failed = true;
     console.error(
-      '\'' + e.task + '\'',
+      '\'' + e.name + '\'',
       'errored after',
-      time
+      e.time
     );
     console.error(formatError(e));
   });
 
-  gulpInstance.on('task_not_found', function(err) {
-    console.error('Task \'' + err.task + '\' is not in your gulpfile');
-    console.error('Please check the documentation for proper gulpfile formatting');
-    process.exit(1);
-  });
 }
 
 function main(args) {
@@ -153,7 +142,12 @@ function main(args) {
       throw new Error('Unknown command ' + args[0])
     }
   }
-  gulp.start(...tasks);
+  console.log(tasks)
+  gulp['series'](tasks)(function(err) {
+    if (err) {
+      exit(1);
+    }
+  });
 }
 
 main(process.argv.slice(2));

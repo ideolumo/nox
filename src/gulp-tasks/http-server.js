@@ -12,6 +12,6 @@ module.exports = (context) => {
    *
    * Starts docker & browser-sync
    */
-  gulp.task('http-server', ['docker', 'browser-sync']);
+  gulp.task('http-server', gulp.series('docker', 'browser-sync'));
 };
 

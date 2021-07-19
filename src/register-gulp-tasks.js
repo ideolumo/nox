@@ -14,13 +14,13 @@ module.exports = (context) => {
   require('./gulp-tasks/compress-images')(context);
 
 
-  gulp.task('build', [
+  gulp.task('build', gulp.series(
     'clean',
     'template',
     'pages',
     'javascript',
     'static'
-  ]);
+  ));
 
   gulp.task('watch-pages', () => {
     return gulpWatch('src/pages/**/*', { ignoreInitial: false }, vinyl => {
@@ -40,14 +40,18 @@ module.exports = (context) => {
     gulp.watch('src/data/**/*', ['pages']);
   });
 
-  gulp.task('watch', [
+  gulp.task('watch', gulp.series(
     'watch-pages',
     'watch-others'
-  ]);
+  ));
 
-  gulp.task('default', [
+  gulp.task('default', gulp.series(
     'build',
-    'watch',
-    'http-server'
-  ]);
+    gulp.parallel(
+     'watch',
+      'http-server'
+    )
+  ), () => {
+    console.log('hallo')
+  });
 }
