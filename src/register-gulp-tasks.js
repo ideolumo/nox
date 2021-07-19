@@ -24,7 +24,7 @@ module.exports = (context) => {
 
   gulp.task('watch-pages', () => {
     return gulpWatch('src/pages/**/*', { ignoreInitial: false }, vinyl => {
-      gulp.start('pages')
+      gulp.series('pages')
     })
   })
 
