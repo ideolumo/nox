@@ -11,12 +11,12 @@ const sass        = require('node-sass');
 let gulpComposedPipesPug = (context) => {
   let options = context.options;
   console.log(process.cwd());
-  return [
+  return gulp.series(
     gulpComposedPipesPug.pipeData(options),
     gulpComposedPipesPug.pipePug(options),
     gulpComposedPipesPug.pipeHtmlMin(options),
     gulpComposedPipesPug.pipeRenameExtension(options),
-  ];
+  );
 }
 
 /**

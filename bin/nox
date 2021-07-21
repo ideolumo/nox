@@ -142,12 +142,16 @@ function main(args) {
       throw new Error('Unknown command ' + args[0])
     }
   }
+  console.log('xxx')
   console.log(tasks)
+  
   gulp['series'](tasks)(function(err) {
     if (err) {
+      console.err(err)
       exit(1);
     }
   });
+  
 }
 
 main(process.argv.slice(2));
