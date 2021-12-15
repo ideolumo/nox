@@ -41,5 +41,5 @@ module.exports = (context) => {
     .pipe(context.browserSync.stream())
   );
 
-  gulp.task('template', ['template-sass', 'template-assets']);
+  gulp.task('template', gulp.series('template-sass', 'template-assets'));
 };

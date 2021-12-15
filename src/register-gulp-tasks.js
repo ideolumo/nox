@@ -14,40 +14,44 @@ module.exports = (context) => {
   require('./gulp-tasks/compress-images')(context);
 
 
-  gulp.task('build', [
+  gulp.task('build', gulp.series(
     'clean',
     'template',
     'pages',
     'javascript',
     'static'
-  ]);
+  ));
 
   gulp.task('watch-pages', () => {
-    return gulpWatch('src/pages/**/*', { ignoreInitial: false }, vinyl => {
-      gulp.start('pages')
+    return gulp.watch(['src/pages/**/*'], { ignoreInitial: false }, cb => {
+      //gulp.series('pages')
+      console.log('hallo')
+      cb()
     })
   })
 
   gulp.task('watch-others', () => {
-    gulp.watch(['package.json'], ['build']);
+    gulp.watch(['package.json'], gulp.series('build'));
     //gulp.watch(['src/pages/**/*.*'], ['pages']);
-    gulp.watch('src/partials/**/*', ['build']);
-    gulp.watch('src/css/**/*.sass', ['sass']);
-    gulp.watch('src/js/**/*.js', ['js']);
-    gulp.watch(['src/static/**/*', 'src/static/**/.*'], ['static']);
-    gulp.watch('src/template/**/*', ['build']);
-    gulp.watch('src/components/**/*', ['build']);
-    gulp.watch('src/data/**/*', ['pages']);
+    gulp.watch('src/partials/**/*', gulp.series('build'));
+    gulp.watch('src/css/**/*.sass', gulp.series('sass'));
+    gulp.watch('src/js/**/*.js', gulp.series('js'));
+    gulp.watch(['src/static/**/*', 'src/static/**/.*'], gulp.series('static'));
+    gulp.watch('src/template/**/*', gulp.series('build'));
+    gulp.watch('src/components/**/*', gulp.series('build'));
+    gulp.watch('src/data/**/*', gulp.series('pages'));
   });
 
-  gulp.task('watch', [
+  gulp.task('watch', gulp.parallel(
     'watch-pages',
     'watch-others'
-  ]);
+  ));
 
-  gulp.task('default', [
+  gulp.task('default', gulp.parallel(
     'build',
     'watch',
     'http-server'
-  ]);
+  ), () => {
+    console.log('hallo')
+  });
 }
